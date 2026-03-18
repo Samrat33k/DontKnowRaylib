@@ -21,14 +21,15 @@ namespace Brahmanda
 		Application& operator=(Application&&) = delete;
 
 		bool InitApplication();
-		void CycleApplication();
+		void StartApplicationCycle();
 		void ShutdownApplication();
 
-		void SetGame(IGame* InGame);
+		void ManageGame(IGame* InGame);
 
 	private:
 
 		std::unique_ptr<Engine> EngineRef = nullptr;
 		IGame* GameRef = nullptr;
+		float DeltaTime = 0.f;
 	};
 }

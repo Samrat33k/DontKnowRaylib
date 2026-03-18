@@ -18,13 +18,13 @@ namespace Brahmanda
 	{
 		if (GameRef)
 		{
-			GameRef->InitGame();
+			GameRef->Init();
 		}
 		
 		return true;
 	}
 
-	void Engine::CycleEngine()
+	void Engine::CycleEngine(float DeltaTime)
 	{
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
@@ -33,7 +33,7 @@ namespace Brahmanda
 
 		if (GameRef)
 		{
-			GameRef->CycleGame();
+			GameRef->Cycle(DeltaTime);
 		}
 
 		rlImGuiEnd();
@@ -43,7 +43,10 @@ namespace Brahmanda
 
 	void Engine::ShutdownEngine()
 	{
-
+		if (GameRef)
+		{
+			GameRef->Shutdown();
+		}
 	}
 
 	void Engine::SetGame(IGame* InGame)

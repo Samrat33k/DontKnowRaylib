@@ -1,6 +1,7 @@
 // Copyright (c) 2026-Present Jogeshwar Digital Pvt. Ltd. | Brahmanda Engine. All rights reserved.
 
 #include "Game.h"
+#include "Engine/Framework/AssetManager.h"
 
 //...
 
@@ -9,22 +10,29 @@ Game::Game()
 
 }
 
-bool Game::InitGame()
+bool Game::Init()
 {
 	spdlog::info("Game Initialized!");
-
-	TestTexture = LoadTexture(RESOURCE_DIR "dirt.png");
+	Manager = std::make_unique<Brahmanda::AssetManager>();
+	TestTex = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
+	TestTex1 = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
+	TestTex2 = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
+	TestTex3 = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
+	//TestTexture = LoadTexture(RESOURCE_DIR "dirt.png");
 
 	return false;
 }
 
-void Game::CycleGame()
+void Game::Cycle(float DeltaTime)
 {
-	float DeltaTime = GetFrameTime();
 	static float PosX = 500.f;
 	static float PosY = 500.f;
 
-	DrawTexturePro(TestTexture, { 0, 0, (float)TestTexture.width, (float)TestTexture.height }, { 50, 50, 100, 100 }, {}, 0, WHITE);
+	if (true)
+	{
+		Texture Tex = *Manager->GetTexture(TestTex);
+		DrawTexturePro(Tex, { 0, 0, (float)Tex.width, (float)Tex.height }, { 50, 50, 100, 100 }, {}, 0, WHITE);
+	}
 
 	if (IsKeyDown(KEY_W))
 	{
@@ -82,9 +90,9 @@ void Game::CycleGame()
 
 }
 
-void Game::ShutdownGame()
+void Game::Shutdown()
 {
-	UnloadTexture(TestTexture);
+	//UnloadTexture(TestTexture);
 }
 
 Game::~Game()

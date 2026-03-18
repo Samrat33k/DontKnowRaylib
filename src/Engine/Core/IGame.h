@@ -12,8 +12,8 @@ namespace Brahmanda
 
 		virtual ~IGame() = default;
 
-		virtual bool InitGame() = 0;
-		virtual void CycleGame() = 0;
-		virtual void ShutdownGame() = 0;
+		virtual bool Init() = 0;
+		virtual void Cycle(float DeltaTime) = 0;
+		virtual void Shutdown() = 0;
 	};
 }

@@ -44,13 +44,13 @@ namespace Brahmanda
 		return true;
 	}
 
-	void Application::CycleApplication()
+	void Application::StartApplicationCycle()
 	{
 		assert(EngineRef && "Engine should be Initialized before executing the Game Loop!");
-
 		while (!WindowShouldClose())
 		{
-			EngineRef->CycleEngine();
+			DeltaTime = GetFrameTime();
+			EngineRef->CycleEngine(DeltaTime);
 		}
 
 		ShutdownApplication();
@@ -62,7 +62,7 @@ namespace Brahmanda
 		CloseWindow();
 	}
 
-	void Application::SetGame(IGame* InGame)
+	void Application::ManageGame(IGame* InGame)
 	{
 		GameRef = InGame;
 	}

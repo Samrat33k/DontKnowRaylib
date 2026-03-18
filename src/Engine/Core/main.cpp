@@ -10,10 +10,10 @@ int main()
 	Brahmanda::Application App;
 	Game MyGame;
 	
-	App.SetGame(&MyGame);
+	App.ManageGame(&MyGame);
 	if (App.InitApplication())
 	{
-		App.CycleApplication();
+		App.StartApplicationCycle();
 	}
 
 	return 0;

@@ -20,7 +20,7 @@ namespace Brahmanda
 		Engine& operator=(Engine&&) = delete;
 
 		bool InitEngine();
-		void CycleEngine();
+		void CycleEngine(float DeltaTime);
 		void ShutdownEngine();
 
 		void SetGame(IGame* InGame);
