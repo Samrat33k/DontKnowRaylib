@@ -66,7 +66,7 @@ namespace Brahmanda
 				return *this;
 			}
 
-			//Release();
+			Release();
 
 			AssetID = Other.AssetID;
 			AssetType = Other.AssetType;
@@ -75,6 +75,15 @@ namespace Brahmanda
 			AddRef();
 
 			return *this;
+		}
+
+		void ReleaseHandle()
+		{
+			Release();
+
+			AssetID = 0U;
+			AssetType = EAssetType::EAT_Texture;
+			ManagerRef = nullptr;
 		}
 
 		uint32_t GetID() const
@@ -90,7 +99,7 @@ namespace Brahmanda
 	private:
 		void AddRef()
 		{
-			if (AssetID && !ManagerRef->GetIsShuttingDown())
+			if (AssetID && ManagerRef)
 			{
 				ManagerRef->AddAssetRef(AssetID, AssetType);
 			}
@@ -98,7 +107,7 @@ namespace Brahmanda
 
 		void Release()
 		{
-			if (AssetID && ManagerRef != nullptr)
+			if (AssetID && ManagerRef)
 			{
 				if (!ManagerRef->GetIsShuttingDown())
 				{

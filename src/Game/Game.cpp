@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include "Engine/Framework/AssetManager.h"
+#include "Engine/Framework/Logger.h"
 
 //...
 
@@ -12,7 +13,7 @@ Game::Game()
 
 bool Game::Init()
 {
-	spdlog::info("Game Initialized!");
+	Logger::Info("Game Initialized!");
 	TestTex = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	TestTex1 = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	TestTex2 = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
@@ -34,7 +35,8 @@ void Game::Cycle(float DeltaTime)
 	if (IsKeyDown(KEY_W))
 	{
 		PosY += -1 * 100 * DeltaTime;
-		Manager->ReqUnloadTexture(TestTex);
+		TestTex.ReleaseHandle();
+		//Manager->ReqUnloadTexture(TestTex);
 	}
 	if (IsKeyDown(KEY_S))
 	{

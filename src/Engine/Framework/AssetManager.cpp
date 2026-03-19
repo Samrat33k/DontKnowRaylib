@@ -3,7 +3,7 @@
 #include "AssetManager.h"
 
 #include <raylib.h>
-#include <spdlog/spdlog.h>
+#include "Engine/Framework/Logger.h"
 
 //...
 
@@ -25,7 +25,7 @@ namespace Brahmanda
 		if (It != LoadedTextureIDs.end())
 		{
 			LoadedTextureList[It->second].RefCount += 1;
-			spdlog::info("Loaded Texture found. TexId: {}, Ref count: {}", It->second, LoadedTextureList[It->second].RefCount);
+			Logger::Info("Loaded Texture found. TexId: {}, Ref count: {}", It->second, LoadedTextureList[It->second].RefCount);
 			return TextureHandle(It->second, this);
 		}
 
@@ -36,7 +36,7 @@ namespace Brahmanda
 		NewEntry.Data = std::make_unique<Texture>(LoadTexture(InPath.c_str()));
 		NewEntry.RefCount += 1;
 		LoadedTextureList[TexID] = std::move(NewEntry);
-		spdlog::info("New texture loaded.TexID: {}, Ref count: {}", TexID, LoadedTextureList[TexID].RefCount);
+		Logger::Info("New texture loaded.TexID: {}, Ref count: {}", TexID, LoadedTextureList[TexID].RefCount);
 
 		return TextureHandle(TexID, this);
 	}
@@ -52,11 +52,11 @@ namespace Brahmanda
 		It->second.RefCount++;
 	}
 
-	void AssetManager::ReqUnloadTexture(TextureHandle& InHandle)
+	void AssetManager::ReqUnloadTexture(const TextureHandle& InHandle)
 	{
 		if (!InHandle.GetIsValid())
 		{
-			spdlog::warn("Invalid Texture handle.");
+			Logger::Info("Invalid Texture handle.");
 
 			return;
 		}
@@ -71,23 +71,21 @@ namespace Brahmanda
 
 		if (It->second.RefCount == 0)
 		{
-			spdlog::warn("Double delete detected!");
+			Logger::Info("Double delete detected!");
 
 			return;
 		}
 
 		It->second.RefCount--;
 
-		spdlog::info("Released Texture handle. TexId: {}, Ref count: {}", ID, It->second.RefCount);
-
-		InHandle = TextureHandle{}; //TODO: This Line is causing double ref decrease. Take a look.
+		Logger::Info("Released Texture handle. TexId: {}, Ref count: {}", ID, It->second.RefCount);
 
 		if (It->second.RefCount == 0)
 		{
 			auto Path = It->second.PathToAsset;
 			Texture* Tex = It->second.Data.get();
 
-			spdlog::info("Unloaded Texture. TexId: {}, Ref count: {}", ID, It->second.RefCount);
+			Logger::Info("Unloaded Texture. TexId: {}, Ref count: {}", ID, It->second.RefCount);
 
 			UnloadTexture(*Tex);
 			LoadedTextureIDs.erase(Path);
@@ -105,21 +103,21 @@ namespace Brahmanda
 
 		if (It->second.RefCount == 0)
 		{
-			spdlog::warn("Double delete detected!");
+			Logger::Warn("Double delete detected!");
 
 			return;
 		}
 
 		It->second.RefCount--;
 
-		spdlog::info("Released DD Texture handle. TexId: {}, Ref count: {}", InID, It->second.RefCount);
+		Logger::Info("Released DD Texture handle. TexId: {}, Ref count: {}", InID, It->second.RefCount);
 
 		if (It->second.RefCount == 0)
 		{
 			auto Path = It->second.PathToAsset;
 			Texture* Tex = It->second.Data.get();
 
-			spdlog::info("Unloaded DD Texture. TexId: {}, Ref count: {}", InID, It->second.RefCount);
+			Logger::Info("Unloaded DD Texture. TexId: {}, Ref count: {}", InID, It->second.RefCount);
 
 			UnloadTexture(*Tex);
 			LoadedTextureIDs.erase(Path);

@@ -8,6 +8,7 @@ project("DontKnowRaylib")
 set(CMAKE_CXX_STANDARD 17)
 
 set(PRODUCTION_BUILD OFF CACHE BOOL "Make this a production build" FORCE)
+set(ENABLE_LOGGER ON CACHE BOOL "Enable logging" FORCE)
 
 if (MSVC)
 	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
@@ -31,6 +32,12 @@ if(PRODUCTION_BUILD)
 else()
 	target_compile_definitions("${CMAKE_PROJECT_NAME}" PUBLIC RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/resources/")
 	target_compile_definitions("${CMAKE_PROJECT_NAME}" PUBLIC PRODUCTION_BUILD=0)
+endif()
+
+if(ENABLE_LOGGER)
+	target_compile_definitions("${CMAKE_PROJECT_NAME}" PUBLIC ENABLE_LOGGER=1)
+else()
+	target_compile_definitions("${CMAKE_PROJECT_NAME}" PUBLIC ENABLE_LOGGER=0)
 endif()
 
 if(MSVC)

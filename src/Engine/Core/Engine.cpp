@@ -5,6 +5,7 @@
 #include "ModuleIncludes.h"
 #include "IGame.h"
 #include "Engine/Framework/AssetManager.h"
+#include "Engine/Framework/Logger.h"
 
 //...
 
@@ -12,11 +13,13 @@ namespace Brahmanda
 {
 	Engine::Engine()
 	{
-		
+
 	}
 
 	bool Engine::InitEngine()
 	{
+		Logger::InitLogger();
+
 		GlobalAssetManager = std::make_unique<AssetManager>();
 
 		if (GameRef)

@@ -23,7 +23,7 @@ namespace Brahmanda
 
 		TextureHandle ReqLoadTexture(const std::string& InPath);
 		void AddTextureRef(uint32_t InID);
-		void ReqUnloadTexture(TextureHandle& InHandle);
+		void ReqUnloadTexture(const TextureHandle& InHandle);
 		void ReleaseTexture(uint32_t InID);
 
 		GeometryHandle ReqLoadGeometry(const std::string& InPath);
