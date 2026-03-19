@@ -24,6 +24,7 @@ public:
 	bool Init() override;
 	void Cycle(float DeltaTime) override;
 	void Shutdown() override;
+	void SetAssetManager(Brahmanda::AssetManager* InMgr) override;
 
 private:
 
@@ -31,5 +32,6 @@ private:
 	Brahmanda::TextureHandle TestTex1;
 	Brahmanda::TextureHandle TestTex2;
 	Brahmanda::TextureHandle TestTex3;
-	std::unique_ptr<Brahmanda::AssetManager> Manager;
+
+	Brahmanda::AssetManager* Manager = nullptr;
 };

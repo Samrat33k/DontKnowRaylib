@@ -4,6 +4,7 @@
 
 #include "ModuleIncludes.h"
 #include "IGame.h"
+#include "Engine/Framework/AssetManager.h"
 
 //...
 
@@ -16,11 +17,14 @@ namespace Brahmanda
 
 	bool Engine::InitEngine()
 	{
+		GlobalAssetManager = std::make_unique<AssetManager>();
+
 		if (GameRef)
 		{
+			GameRef->SetAssetManager(GlobalAssetManager.get());
 			GameRef->Init();
 		}
-		
+
 		return true;
 	}
 
@@ -52,6 +56,11 @@ namespace Brahmanda
 	void Engine::SetGame(IGame* InGame)
 	{
 		GameRef = InGame;
+	}
+
+	AssetManager* Engine::GetGameAssetManager() const
+	{
+		return GlobalAssetManager.get();
 	}
 
 	Engine::~Engine()

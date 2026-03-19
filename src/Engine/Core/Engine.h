@@ -7,6 +7,7 @@
 namespace Brahmanda
 {
 	class IGame;
+	class AssetManager;
 
 	class Engine
 	{
@@ -24,9 +25,11 @@ namespace Brahmanda
 		void ShutdownEngine();
 
 		void SetGame(IGame* InGame);
+		AssetManager* GetGameAssetManager() const;
 
 	private:
 
 		IGame* GameRef = nullptr;
+		std::unique_ptr<Brahmanda::AssetManager> GlobalAssetManager;
 	};
 }

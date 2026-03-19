@@ -4,17 +4,77 @@
 
 namespace Brahmanda
 {
+	enum class EAssetType
+	{
+		EAT_NONE,
+		EAT_Texture,
+		EAT_Geometry,
+		EAT_SkeletalGeo,
+		EAT_AudioFile,
+	};
+
+	class IAssetBridge
+	{
+	public:
+		IAssetBridge() {};
+		virtual ~IAssetBridge() {};
+
+		virtual void AddAssetRef(uint32_t InID, EAssetType InType) = 0;
+		virtual void ReqUnloadAsset(uint32_t InID, EAssetType InType) = 0;
+		virtual bool GetIsShuttingDown() const = 0;
+	};
+
 	struct AssetHandle
 	{
-		AssetHandle()
+		AssetHandle() = default;
+
+		AssetHandle(uint32_t InID, EAssetType InType, IAssetBridge* InMgrRef)
+			: AssetID(InID), AssetType(InType), ManagerRef(InMgrRef)
 		{
 
 		}
 
-		AssetHandle(uint32_t InID) :
-			AssetID(InID)
+		AssetHandle(const AssetHandle& Other)
 		{
+			AssetID = Other.AssetID;
+			AssetType = Other.AssetType;
+			ManagerRef = Other.ManagerRef;
 
+			AddRef();
+		}
+
+		AssetHandle(AssetHandle&& Other) noexcept
+		{
+			AssetID = Other.AssetID;
+			AssetType = Other.AssetType;
+			ManagerRef = Other.ManagerRef;
+
+			Other.AssetID = 0U;
+			Other.AssetType = EAssetType::EAT_NONE;
+			Other.ManagerRef = nullptr;
+		}
+
+		~AssetHandle()
+		{
+			Release();
+		}
+
+		AssetHandle& operator=(const AssetHandle& Other)
+		{
+			if (this == &Other)
+			{
+				return *this;
+			}
+
+			//Release();
+
+			AssetID = Other.AssetID;
+			AssetType = Other.AssetType;
+			ManagerRef = Other.ManagerRef;
+
+			AddRef();
+
+			return *this;
 		}
 
 		uint32_t GetID() const
@@ -22,38 +82,74 @@ namespace Brahmanda
 			return AssetID;
 		}
 
+		uint32_t GetIsValid() const
+		{
+			return AssetID != 0 && ManagerRef != nullptr;
+		}
+
+	private:
+		void AddRef()
+		{
+			if (AssetID && !ManagerRef->GetIsShuttingDown())
+			{
+				ManagerRef->AddAssetRef(AssetID, AssetType);
+			}
+		}
+
+		void Release()
+		{
+			if (AssetID && ManagerRef != nullptr)
+			{
+				if (!ManagerRef->GetIsShuttingDown())
+				{
+					ManagerRef->ReqUnloadAsset(AssetID, AssetType);
+				}
+			}
+
+			AssetID = 0U;
+			AssetType = EAssetType::EAT_NONE;
+			ManagerRef = nullptr;
+		}
+		
+	private:
 		uint32_t AssetID = 0U;
+		EAssetType AssetType = EAssetType::EAT_NONE;
+		IAssetBridge* ManagerRef = nullptr;
 	};
 
 	struct TextureHandle : public AssetHandle
 	{
-		//Additional Data
-
 		TextureHandle()
-		{
-			AssetID = 0U;
-		}
-
-		TextureHandle(uint32_t InID) :
-			AssetHandle(InID)
+			: AssetHandle()
 		{
 
 		}
+
+		TextureHandle(uint32_t InID, IAssetBridge* InMgrRef)
+			: AssetHandle(InID, EAssetType::EAT_Texture, InMgrRef)
+		{
+
+		}
+
+		//Additional Data
+		//...
 	};
 
 	struct GeometryHandle : public AssetHandle
 	{
-		//Additional Data
-
 		GeometryHandle()
-		{
-			AssetID = 0U;
-		}
-
-		GeometryHandle(uint32_t InID) :
-			AssetHandle(InID)
+			: AssetHandle()
 		{
 
 		}
+
+		GeometryHandle(uint32_t InID, IAssetBridge* InMgrRef)
+			: AssetHandle(InID, EAssetType::EAT_Geometry, InMgrRef)
+		{
+
+		}
+
+		//Additional Data
+		//...
 	};
 }

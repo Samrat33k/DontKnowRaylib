@@ -13,12 +13,10 @@ Game::Game()
 bool Game::Init()
 {
 	spdlog::info("Game Initialized!");
-	Manager = std::make_unique<Brahmanda::AssetManager>();
 	TestTex = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	TestTex1 = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	TestTex2 = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	TestTex3 = Manager->ReqLoadTexture(RESOURCE_DIR "dirt.png");
-	//TestTexture = LoadTexture(RESOURCE_DIR "dirt.png");
 
 	return false;
 }
@@ -28,19 +26,24 @@ void Game::Cycle(float DeltaTime)
 	static float PosX = 500.f;
 	static float PosY = 500.f;
 
-	if (true)
+	if (Texture* Tex = Manager->GetTexture(TestTex))
 	{
-		Texture Tex = *Manager->GetTexture(TestTex);
-		DrawTexturePro(Tex, { 0, 0, (float)Tex.width, (float)Tex.height }, { 50, 50, 100, 100 }, {}, 0, WHITE);
+		DrawTexturePro(*Tex, { 0, 0, (float)Tex->width, (float)Tex->height }, { 50, 50, 100, 100 }, {}, 0, WHITE);
 	}
 
 	if (IsKeyDown(KEY_W))
 	{
 		PosY += -1 * 100 * DeltaTime;
+		Manager->ReqUnloadTexture(TestTex);
 	}
 	if (IsKeyDown(KEY_S))
 	{
 		PosY += 1 * 100 * DeltaTime;
+
+		if (Texture* Tex = Manager->GetTexture(TestTex1))
+		{
+			DrawTexturePro(*Tex, { 0, 0, (float)Tex->width, (float)Tex->height }, { 150, 150, 100, 100 }, {}, 0, WHITE);
+		}
 	}
 	if (IsKeyDown(KEY_D))
 	{
@@ -93,6 +96,11 @@ void Game::Cycle(float DeltaTime)
 void Game::Shutdown()
 {
 	//UnloadTexture(TestTexture);
+}
+
+void Game::SetAssetManager(Brahmanda::AssetManager* InMgr)
+{
+	Manager = InMgr;
 }
 
 Game::~Game()

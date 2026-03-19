@@ -16,7 +16,7 @@ namespace Brahmanda
 
 	AssetManager::~AssetManager()
 	{
-
+		bIsShuttingDown = true;
 	}
 
 	TextureHandle AssetManager::ReqLoadTexture(const std::string& InPath)
@@ -26,7 +26,7 @@ namespace Brahmanda
 		{
 			LoadedTextureList[It->second].RefCount += 1;
 			spdlog::info("Loaded Texture found. TexId: {}, Ref count: {}", It->second, LoadedTextureList[It->second].RefCount);
-			return TextureHandle(It->second);
+			return TextureHandle(It->second, this);
 		}
 
 		uint32_t TexID = ++LastTexID;
@@ -38,7 +38,93 @@ namespace Brahmanda
 		LoadedTextureList[TexID] = std::move(NewEntry);
 		spdlog::info("New texture loaded.TexID: {}, Ref count: {}", TexID, LoadedTextureList[TexID].RefCount);
 
-		return TextureHandle(TexID);
+		return TextureHandle(TexID, this);
+	}
+
+	void AssetManager::AddTextureRef(uint32_t InID)
+	{
+		auto It = LoadedTextureList.find(InID);
+		if (It == LoadedTextureList.end())
+		{
+			return;
+		}
+
+		It->second.RefCount++;
+	}
+
+	void AssetManager::ReqUnloadTexture(TextureHandle& InHandle)
+	{
+		if (!InHandle.GetIsValid())
+		{
+			spdlog::warn("Invalid Texture handle.");
+
+			return;
+		}
+
+		uint32_t ID = InHandle.GetID();
+
+		auto It = LoadedTextureList.find(ID);
+		if (It == LoadedTextureList.end())
+		{
+			return;
+		}
+
+		if (It->second.RefCount == 0)
+		{
+			spdlog::warn("Double delete detected!");
+
+			return;
+		}
+
+		It->second.RefCount--;
+
+		spdlog::info("Released Texture handle. TexId: {}, Ref count: {}", ID, It->second.RefCount);
+
+		InHandle = TextureHandle{}; //TODO: This Line is causing double ref decrease. Take a look.
+
+		if (It->second.RefCount == 0)
+		{
+			auto Path = It->second.PathToAsset;
+			Texture* Tex = It->second.Data.get();
+
+			spdlog::info("Unloaded Texture. TexId: {}, Ref count: {}", ID, It->second.RefCount);
+
+			UnloadTexture(*Tex);
+			LoadedTextureIDs.erase(Path);
+			LoadedTextureList.erase(It);
+		}
+	}
+
+	void AssetManager::ReleaseTexture(uint32_t InID)
+	{
+		auto It = LoadedTextureList.find(InID);
+		if (It == LoadedTextureList.end())
+		{
+			return;
+		}
+
+		if (It->second.RefCount == 0)
+		{
+			spdlog::warn("Double delete detected!");
+
+			return;
+		}
+
+		It->second.RefCount--;
+
+		spdlog::info("Released DD Texture handle. TexId: {}, Ref count: {}", InID, It->second.RefCount);
+
+		if (It->second.RefCount == 0)
+		{
+			auto Path = It->second.PathToAsset;
+			Texture* Tex = It->second.Data.get();
+
+			spdlog::info("Unloaded DD Texture. TexId: {}, Ref count: {}", InID, It->second.RefCount);
+
+			UnloadTexture(*Tex);
+			LoadedTextureIDs.erase(Path);
+			LoadedTextureList.erase(It);
+		}
 	}
 
 	GeometryHandle AssetManager::ReqLoadGeometry(const std::string& InPath)
@@ -47,25 +133,106 @@ namespace Brahmanda
 		return GeometryHandle();
 	}
 
+	void AssetManager::ReqUnloadGeometry(const GeometryHandle& InHandle)
+	{
+
+	}
+
 	void AssetManager::UnloadUnused()
 	{
 
 	}
 
-	Texture* AssetManager::GetTexture(const TextureHandle& InHandle)
+	Texture* AssetManager::GetTexture(TextureHandle& InHandle)
 	{
+		if (!InHandle.GetIsValid()) 
+		{
+			InHandle = TextureHandle{};
+			return nullptr;
+		}
+
 		auto It = LoadedTextureList.find(InHandle.GetID());
 		if (It != LoadedTextureList.end())
 		{
 			return It->second.Data.get();
 		}
 
+		InHandle = TextureHandle{};
 		return nullptr;
 	}
 
-	Model* AssetManager::GetGeometry(const GeometryHandle& InHandle)
+	Model* AssetManager::GetGeometry(GeometryHandle& InHandle)
 	{
 
 		return nullptr;
+	}
+
+	void AssetManager::AddAssetRef(uint32_t InID, EAssetType InType)
+	{
+		switch (InType)
+		{
+		case Brahmanda::EAssetType::EAT_NONE:
+
+			break;
+
+		case Brahmanda::EAssetType::EAT_Texture:
+
+			AddTextureRef(InID);
+
+			break;
+
+		case Brahmanda::EAssetType::EAT_Geometry:
+
+			break;
+
+		case Brahmanda::EAssetType::EAT_SkeletalGeo:
+
+			break;
+
+		case Brahmanda::EAssetType::EAT_AudioFile:
+
+			break;
+
+		default:
+
+			break;
+		}
+	}
+
+	void AssetManager::ReqUnloadAsset(uint32_t InID, EAssetType InType)
+	{
+		switch (InType)
+		{
+		case Brahmanda::EAssetType::EAT_NONE:
+
+			break;
+
+		case Brahmanda::EAssetType::EAT_Texture:
+
+			ReleaseTexture(InID);
+
+			break;
+
+		case Brahmanda::EAssetType::EAT_Geometry:
+
+			break;
+
+		case Brahmanda::EAssetType::EAT_SkeletalGeo:
+
+			break;
+
+		case Brahmanda::EAssetType::EAT_AudioFile:
+
+			break;
+
+		default:
+
+			break;
+		}
+	}
+
+	bool AssetManager::GetIsShuttingDown() const
+	{
+		return bIsShuttingDown;
 	}
 }

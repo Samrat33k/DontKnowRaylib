@@ -6,6 +6,8 @@
 
 namespace Brahmanda
 {
+	class AssetManager;
+
 	class IGame
 	{
 	public:
@@ -15,5 +17,7 @@ namespace Brahmanda
 		virtual bool Init() = 0;
 		virtual void Cycle(float DeltaTime) = 0;
 		virtual void Shutdown() = 0;
+
+		virtual void SetAssetManager(AssetManager* InMgr) = 0;
 	};
 }
