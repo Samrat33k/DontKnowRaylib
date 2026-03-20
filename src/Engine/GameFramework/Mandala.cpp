@@ -2,6 +2,7 @@
 
 #include "Mandala.h"
 
+
 //...
 
 namespace Brahmanda
@@ -31,5 +32,10 @@ namespace Brahmanda
 	void Mandala::Shutdown()
 	{
 
+	}
+
+	void Mandala::SetWorldConfig(const WorldConfig& InConfig)
+	{
+		
 	}
 }

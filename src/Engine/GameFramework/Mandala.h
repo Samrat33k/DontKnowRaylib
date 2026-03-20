@@ -3,11 +3,17 @@
 #pragma once
 
 #include <cstdint>
+#include <array>
+
+#include "GameConfig.h"
+#include "WorldLayer.h"
 
 //...
 
 namespace Brahmanda
 {
+	class WorldLayer;
+
 	struct WorldConfig
 	{
 	public:
@@ -22,21 +28,8 @@ namespace Brahmanda
 
 		}
 
-		void SetMaxWorldLayerCount(uint16_t InNewCount)
-		{
-			if (InNewCount == 0U)
-			{
-				MaxWorldLayers = 1;
-				
-				return;
-			}
-
-			MaxWorldLayers = InNewCount;
-		}
-
 	private:
 
-		uint16_t MaxWorldLayers = 8;
 	};
 
 	class Mandala
@@ -50,6 +43,11 @@ namespace Brahmanda
 		void Cycle(float DeltaTime);
 		void Shutdown();
 
-		void SetWorldConfig();
+		void SetWorldConfig(const WorldConfig& InConfig);
+
+	private:
+
+		uint16_t ActiveWorldLayerCount = 0;
+		std::array<WorldLayer, Config::World::MAX_WORLD_LAYER_COUNT> Worlds;
 	};
 }

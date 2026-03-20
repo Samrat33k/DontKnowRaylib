@@ -2,9 +2,12 @@
 
 #pragma once
 
-//...
+#include "Engine/GameFramework/Game.h"
 
-namespace Brahmanda
+class MyGame : public Brahmanda::Game
 {
+public:
 
-}
+	MyGame();
+	~MyGame();
+};

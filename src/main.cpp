@@ -1,16 +1,16 @@
 // Copyright (c) 2026-Present Jogeshwar Digital Pvt. Ltd. | Brahmanda Engine. All rights reserved.
 
-#include "Application.h"
-#include "Game/Game.h"
+#include "Engine/Core/Application.h"
+#include "MyGame/Systems/MyGame.h"
 
 //...
 
 int main()
 {
 	Brahmanda::Application App;
-	Brahmanda::Game MyGame;
+	MyGame NewGame;
 	
-	App.ManageGame(&MyGame);
+	App.ManageGame(&NewGame);
 	if (App.InitApplication())
 	{
 		App.StartApplicationCycle();

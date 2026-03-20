@@ -1,8 +1,8 @@
 // Copyright (c) 2026-Present Jogeshwar Digital Pvt. Ltd. | Brahmanda Engine. All rights reserved.
 
 #include "Game.h"
-#include "Engine/Framework/AssetManager.h"
-#include "Engine/Framework/Logger.h"
+#include "Engine/Systems/AssetManager.h"
+#include "Engine/Systems/Logger.h"
 #include "Mandala.h"
 
 //...
@@ -111,14 +111,14 @@ namespace Brahmanda
 		//...
 	}
 
-	void Mandala::SetWorldConfig()
-	{
-
-	}
-
 	void Game::SetAssetManager(Brahmanda::AssetManager* InMgr)
 	{
 		Manager = InMgr;
+	}
+
+	Mandala* Game::GetGameMandala() const
+	{
+		return MandalaRef.get();
 	}
 
 	Game::~Game()

@@ -4,8 +4,8 @@
 
 #include "ModuleIncludes.h"
 #include "IGame.h"
-#include "Engine/Framework/AssetManager.h"
-#include "Engine/Framework/Logger.h"
+#include "Engine/Systems/AssetManager.h"
+#include "Engine/Systems/Logger.h"
 
 //...
 

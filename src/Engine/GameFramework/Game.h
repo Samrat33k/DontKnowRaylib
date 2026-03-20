@@ -6,7 +6,7 @@
 #include "Engine/Core/CoreIncludes.h"
 
 #include "Engine/Core/IGame.h"
-#include "Engine/Framework/AssetTypes.h"
+#include "Engine/Core/Types/AssetTypes.h"
 
 //...
 
@@ -26,7 +26,9 @@ namespace Brahmanda
 		bool Init() override;
 		void Cycle(float DeltaTime) override;
 		void Shutdown() override;
+		
 		void SetAssetManager(Brahmanda::AssetManager* InMgr) override;
+		Mandala* GetGameMandala() const;
 
 	private:
 

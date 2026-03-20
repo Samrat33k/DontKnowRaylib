@@ -1,10 +1,15 @@
 // Copyright (c) 2026-Present Jogeshwar Digital Pvt. Ltd. | Brahmanda Engine. All rights reserved.
 
-#include "WorldLayer.h"
+#include "MyGame.h"
 
 //...
 
-namespace Brahmanda
+MyGame::MyGame()
+{
+
+}
+
+MyGame::~MyGame()
 {
 
 }
