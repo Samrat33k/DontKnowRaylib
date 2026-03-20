@@ -2,7 +2,13 @@
 
 #pragma once
 
+#include <vector>
+
 #include "Engine/GameFramework/WorldLayer.h"
+
+//...
+
+struct Block;
 
 class GameMap01 : public Brahmanda::WorldLayer
 {
@@ -10,4 +16,12 @@ public:
 
 	GameMap01();
 	~GameMap01();
+
+	void Create(int InW, int InH);
+	Block& GetBlockUnsafe(int InX, int InY);
+	Block* GetBlockSafe(int InX, int InY);
+
+	int w = 0;
+	int h = 0;
+	std::vector<Block> MapData;
 };

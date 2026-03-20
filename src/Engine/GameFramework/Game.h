@@ -10,6 +10,7 @@
 
 //...
 
+
 namespace Brahmanda
 {
 	class AssetManager;
@@ -20,6 +21,8 @@ namespace Brahmanda
 	{
 	public:
 
+		using PARENT = Brahmanda::Game;
+
 		Game();
 		~Game() override;
 
@@ -27,15 +30,11 @@ namespace Brahmanda
 		void Cycle(float DeltaTime) override;
 		void Shutdown() override;
 		
+		AssetManager* GetAssetManager() const;
 		void SetAssetManager(Brahmanda::AssetManager* InMgr) override;
 		Mandala* GetGameMandala() const;
 
 	private:
-
-		TextureHandle TestTex;
-		TextureHandle TestTex1;
-		TextureHandle TestTex2;
-		TextureHandle TestTex3;
 
 		AssetManager* Manager = nullptr;
 		std::unique_ptr<Mandala> MandalaRef;

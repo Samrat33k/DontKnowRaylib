@@ -1,0 +1,25 @@
+// Copyright (c) 2026-Present Jogeshwar Digital Pvt. Ltd. | Brahmanda Engine. All rights reserved.
+
+#pragma once
+
+#include <cstdint>
+
+//...
+
+struct Block
+{
+public:
+
+	enum
+	{
+		air = 0,
+		dirt,
+
+		BLOCKS_COUNT
+	};
+
+	Block();
+	~Block();
+
+	uint16_t Type = 0;
+};

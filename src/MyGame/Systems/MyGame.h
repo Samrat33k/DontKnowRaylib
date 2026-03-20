@@ -4,10 +4,29 @@
 
 #include "Engine/GameFramework/Game.h"
 
+namespace Brahmanda
+{
+	struct TextureHandle;
+	class AssetManager;
+}
+
 class MyGame : public Brahmanda::Game
 {
 public:
 
 	MyGame();
 	~MyGame();
+
+	bool Init() override;
+	void Cycle(float DeltaTime) override;
+	void Shutdown() override;
+
+private:
+
+	Brahmanda::TextureHandle TestTex;
+	Brahmanda::TextureHandle TestTex1;
+	Brahmanda::TextureHandle TestTex2;
+	Brahmanda::TextureHandle TestTex3;
+
+	Brahmanda::AssetManager* ManagerRef = nullptr;
 };

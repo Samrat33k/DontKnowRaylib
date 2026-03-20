@@ -29,4 +29,12 @@ namespace Logger
 		spdlog::warn(fmt, std::forward<Args>(args)...);
 #endif // ENABLE_LOGGER
 	}
+
+	inline void Fatal(const char* fmt)
+	{
+#if ENABLE_LOGGER
+		spdlog::critical("FATAL: {}", fmt);
+		std::abort();
+#endif // ENABLE_LOGGER
+	}
 }
