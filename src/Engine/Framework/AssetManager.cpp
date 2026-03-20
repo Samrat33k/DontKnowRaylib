@@ -35,6 +35,7 @@ namespace Brahmanda
 		TextureEntry NewEntry;
 		NewEntry.Data = std::make_unique<Texture>(LoadTexture(InPath.c_str()));
 		NewEntry.RefCount += 1;
+		NewEntry.PathToAsset = InPath;
 		LoadedTextureList[TexID] = std::move(NewEntry);
 		Logger::Info("New texture loaded.TexID: {}, Ref count: {}", TexID, LoadedTextureList[TexID].RefCount);
 
@@ -54,6 +55,9 @@ namespace Brahmanda
 
 	void AssetManager::ReqUnloadTexture(const TextureHandle& InHandle)
 	{
+		//Potentially Dead code. Prefer not to call this function manually.
+		Logger::Warn("AssetManager - ReqUnloadTexture: Prefer not calling this function manually.");
+
 		if (!InHandle.GetIsValid())
 		{
 			Logger::Info("Invalid Texture handle.");
@@ -141,11 +145,10 @@ namespace Brahmanda
 
 	}
 
-	Texture* AssetManager::GetTexture(TextureHandle& InHandle)
+	Texture* AssetManager::GetTexture(const TextureHandle& InHandle)
 	{
 		if (!InHandle.GetIsValid()) 
 		{
-			InHandle = TextureHandle{};
 			return nullptr;
 		}
 
@@ -155,11 +158,10 @@ namespace Brahmanda
 			return It->second.Data.get();
 		}
 
-		InHandle = TextureHandle{};
 		return nullptr;
 	}
 
-	Model* AssetManager::GetGeometry(GeometryHandle& InHandle)
+	Model* AssetManager::GetGeometry(const GeometryHandle& InHandle)
 	{
 
 		return nullptr;

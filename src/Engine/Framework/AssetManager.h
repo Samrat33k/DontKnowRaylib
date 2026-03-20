@@ -32,8 +32,8 @@ namespace Brahmanda
 
 		void UnloadUnused();
 
-		Texture* GetTexture(TextureHandle& InHandle);
-		Model* GetGeometry(GeometryHandle& InHandle);
+		Texture* GetTexture(const TextureHandle& InHandle);
+		Model* GetGeometry(const GeometryHandle& InHandle);
 
 		//Interface Implementation
 		void AddAssetRef(uint32_t InID, EAssetType InType) override;

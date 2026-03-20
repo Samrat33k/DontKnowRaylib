@@ -8,7 +8,7 @@
 int main()
 {
 	Brahmanda::Application App;
-	Game MyGame;
+	Brahmanda::Game MyGame;
 	
 	App.ManageGame(&MyGame);
 	if (App.InitApplication())

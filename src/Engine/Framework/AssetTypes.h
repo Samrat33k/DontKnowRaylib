@@ -82,7 +82,7 @@ namespace Brahmanda
 			Release();
 
 			AssetID = 0U;
-			AssetType = EAssetType::EAT_Texture;
+			AssetType = EAssetType::EAT_NONE;
 			ManagerRef = nullptr;
 		}
 
