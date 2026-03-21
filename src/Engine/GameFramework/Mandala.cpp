@@ -1,6 +1,7 @@
 // Copyright (c) 2026-Present Jogeshwar Digital Pvt. Ltd. | Brahmanda Engine. All rights reserved.
 
 #include "Mandala.h"
+#include "Engine/Systems/Logger.h"
 
 
 //...
@@ -19,7 +20,7 @@ namespace Brahmanda
 
 	bool Mandala::Init()
 	{
-
+		Logger::Info("Mandala - Init - Called from Base class!");
 
 		return true;
 	}
@@ -31,7 +32,7 @@ namespace Brahmanda
 
 	void Mandala::Shutdown()
 	{
-
+		Logger::Info("Mandala - Shutdown - Called from Base class!");
 	}
 
 	void Mandala::SetWorldConfig(const WorldConfig& InConfig)

@@ -4,11 +4,15 @@
 
 #include "Engine/GameFramework/Game.h"
 
+//...
+
 namespace Brahmanda
 {
 	struct TextureHandle;
 	class AssetManager;
 }
+
+class Brahmanda::Mandala;
 
 class MyGame : public Brahmanda::Game
 {
@@ -20,6 +24,8 @@ public:
 	bool Init() override;
 	void Cycle(float DeltaTime) override;
 	void Shutdown() override;
+
+	std::unique_ptr<Brahmanda::Mandala> ConstructMandala() override;
 
 private:
 

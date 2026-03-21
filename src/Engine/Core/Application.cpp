@@ -60,6 +60,8 @@ namespace Brahmanda
 	{
 		rlImGuiShutdown();
 		CloseWindow();
+
+		EngineRef->ShutdownEngine();
 	}
 
 	void Application::ManageGame(IGame* InGame)

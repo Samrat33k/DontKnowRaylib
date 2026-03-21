@@ -32,6 +32,7 @@ namespace Brahmanda
 		
 		AssetManager* GetAssetManager() const;
 		void SetAssetManager(Brahmanda::AssetManager* InMgr) override;
+		virtual std::unique_ptr<Mandala> ConstructMandala();
 		Mandala* GetGameMandala() const;
 
 	private:

@@ -18,10 +18,10 @@ namespace Brahmanda
 	{
 		Logger::Info("Game Initialized!");
 
-		MandalaRef = std::make_unique<Mandala>();
+		MandalaRef = ConstructMandala();
 		MandalaRef->Init();
 
-		return false;
+		return true;
 	}
 
 	void Game::Cycle(float DeltaTime)
@@ -45,6 +45,11 @@ namespace Brahmanda
 	void Game::SetAssetManager(Brahmanda::AssetManager* InMgr)
 	{
 		Manager = InMgr;
+	}
+
+	std::unique_ptr<Mandala> Game::ConstructMandala()
+	{
+		return std::make_unique<Mandala>();
 	}
 
 	Mandala* Game::GetGameMandala() const

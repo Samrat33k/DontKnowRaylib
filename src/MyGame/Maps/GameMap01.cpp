@@ -8,7 +8,7 @@
 
 GameMap01::GameMap01()
 {
-
+	Logger::Info("Constructed GameMap01!");
 }
 
 GameMap01::~GameMap01()
@@ -32,7 +32,8 @@ void GameMap01::Create(int InW, int InH)
 
 Block& GameMap01::GetBlockUnsafe(int InX, int InY)
 {
-	Logger::Fatal("Unsafe");
+	//Logger::Fatal("Unsafe");
+
 	return MapData[InX + InY * w];
 }
 

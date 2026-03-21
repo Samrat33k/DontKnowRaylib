@@ -30,4 +30,8 @@ namespace Brahmanda
 	{
 		return bIsLoaded;
 	}
+	bool WorldLayer::GetIsVisible() const
+	{
+		return bIsVisible;
+	}
 }

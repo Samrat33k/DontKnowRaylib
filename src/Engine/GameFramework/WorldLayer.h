@@ -21,11 +21,13 @@ namespace Brahmanda
 		void Unload();
 		
 		bool GetIsLoaded() const;
+		bool GetIsVisible() const;
 
 		//std::vector<Entity> Entities;
 
 	private:
 
 		bool bIsLoaded = false;
+		bool bIsVisible = false;
 	};
 }

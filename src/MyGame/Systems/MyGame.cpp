@@ -4,6 +4,7 @@
 #include "Engine/Core/Types/AssetTypes.h"
 #include "Engine/Systems/AssetManager.h"
 #include "Engine/Systems/Logger.h"
+#include "MyMandala.h"
 
 //...
 
@@ -109,4 +110,9 @@ void MyGame::Shutdown()
 {
 
 	PARENT::Shutdown();
+}
+
+std::unique_ptr<Brahmanda::Mandala> MyGame::ConstructMandala()
+{
+	return std::make_unique<MyMandala>();
 }
