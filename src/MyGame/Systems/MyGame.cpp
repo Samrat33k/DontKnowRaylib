@@ -1,9 +1,10 @@
 // Copyright (c) 2026-Present Jogeshwar Digital Pvt. Ltd. | Brahmanda Engine. All rights reserved.
 
 #include "MyGame.h"
-#include "Engine/Core/Types/AssetTypes.h"
+#include "Engine/Core/Types/HandleTypes.h"
 #include "Engine/Systems/AssetManager.h"
 #include "Engine/Systems/Logger.h"
+#include "Engine/Core/Types/RenderableTypes.h"
 #include "MyMandala.h"
 
 //...
@@ -32,9 +33,9 @@ bool MyGame::Init()
 	return true;
 }
 
-void MyGame::Cycle(float DeltaTime)
+void MyGame::Cycle(float DeltaTime, Brahmanda::FrameContextData& InContext)
 {
-	PARENT::Cycle(DeltaTime);
+	PARENT::Cycle(DeltaTime, InContext);
 
 	static float PosX = 500.f;
 	static float PosY = 500.f;

@@ -2,7 +2,7 @@
 
 #include "Mandala.h"
 #include "Engine/Systems/Logger.h"
-
+#include "Engine/Core/Types/RenderableTypes.h"
 
 //...
 

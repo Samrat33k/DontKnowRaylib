@@ -6,7 +6,7 @@
 #include "Engine/Core/CoreIncludes.h"
 
 #include "Engine/Core/IGame.h"
-#include "Engine/Core/Types/AssetTypes.h"
+#include "Engine/Core/Types/HandleTypes.h"
 
 //...
 
@@ -16,6 +16,7 @@ namespace Brahmanda
 	class AssetManager;
 	struct TextureHandle;
 	class Mandala;
+	struct FrameContextData;
 
 	class Game : public Brahmanda::IGame
 	{
@@ -27,11 +28,12 @@ namespace Brahmanda
 		~Game() override;
 
 		bool Init() override;
-		void Cycle(float DeltaTime) override;
+		void Cycle(float DeltaTime, FrameContextData& InContext) override;
 		void Shutdown() override;
 		
 		AssetManager* GetAssetManager() const;
-		void SetAssetManager(Brahmanda::AssetManager* InMgr) override;
+		void SetAssetManager(Brahmanda::AssetManager* InRef) override;
+
 		virtual std::unique_ptr<Mandala> ConstructMandala();
 		Mandala* GetGameMandala() const;
 

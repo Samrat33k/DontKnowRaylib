@@ -7,6 +7,8 @@
 namespace Brahmanda
 {
 	class AssetManager;
+	class Renderer;
+	struct FrameContextData;
 
 	class IGame
 	{
@@ -15,9 +17,9 @@ namespace Brahmanda
 		virtual ~IGame() = default;
 
 		virtual bool Init() = 0;
-		virtual void Cycle(float DeltaTime) = 0;
+		virtual void Cycle(float DeltaTime, FrameContextData& InContext) = 0;
 		virtual void Shutdown() = 0;
 
-		virtual void SetAssetManager(AssetManager* InMgr) = 0;
+		virtual void SetAssetManager(AssetManager* InRef) = 0;
 	};
 }

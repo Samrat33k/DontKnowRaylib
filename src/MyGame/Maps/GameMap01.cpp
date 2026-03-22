@@ -18,7 +18,12 @@ GameMap01::~GameMap01()
 
 void GameMap01::OnLoad()
 {
-
+	Create(30, 10);
+	GetBlockUnsafe(0, 0).Type = Block::dirt;
+	GetBlockUnsafe(1, 1).Type = Block::dirt;
+	GetBlockUnsafe(2, 2).Type = Block::dirt;
+	GetBlockUnsafe(3, 3).Type = Block::dirt;
+	GetBlockUnsafe(4, 4).Type = Block::dirt;
 }
 
 void GameMap01::OnUnload()
@@ -38,6 +43,8 @@ void GameMap01::Create(int InW, int InH)
 	{
 		It = {};
 	}
+
+	Logger::Info("GameMap01 - MapData Loaded!");
 }
 
 Block& GameMap01::GetBlockUnsafe(int InX, int InY)

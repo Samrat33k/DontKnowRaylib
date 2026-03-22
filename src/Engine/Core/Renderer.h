@@ -16,11 +16,14 @@ namespace Brahmanda
 		~Renderer();
 
 		void InitRenderer();
-		void CycleRenderer();
-		void ShutdownRenderer();
 
 		void BeginRenderFrame();
+		void RenderFrame();
 		void EndRenderFrame();
+		
+		void ShutdownRenderer();
+
+		RenderQueue* GetRenderQueue();
 
 	private:
 

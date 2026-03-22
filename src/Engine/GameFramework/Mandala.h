@@ -13,6 +13,7 @@
 
 namespace Brahmanda
 {
+	class RenderQueue;
 	class WorldLayer;
 
 	struct WorldConfig
@@ -55,5 +56,6 @@ namespace Brahmanda
 
 		uint16_t ActiveWorldLayerCount = 0;
 		WorldLayerCollection<Config::World::MAX_WORLD_LAYER_COUNT> Collection;
+		RenderQueue* RenderQueueRef = nullptr;
 	};
 }

@@ -1,11 +1,7 @@
-#include "Renderer.h"
-#include "Renderer.h"
-#include "Renderer.h"
-#include "Renderer.h"
-#include "Renderer.h"
 // Copyright (c) 2026-Present Jogeshwar Digital Pvt. Ltd. | Brahmanda Engine. All rights reserved.
 
 #include "Renderer.h"
+#include "ModuleIncludes.h"
 #include "Engine/Systems/Logger.h"
 
 //...
@@ -30,23 +26,36 @@ namespace Brahmanda
 
 	}
 
-	void Brahmanda::Renderer::CycleRenderer()
-	{
-
-	}
-
 	void Brahmanda::Renderer::ShutdownRenderer()
 	{
 
 	}
 
+	RenderQueue* Renderer::GetRenderQueue()
+	{
+		return RenderQueueRef.get();
+	}
+
 	void Brahmanda::Renderer::BeginRenderFrame()
 	{
+		BeginDrawing();
+		ClearBackground(RAYWHITE);
 
+		rlImGuiBegin();
+	}
+
+	void Renderer::RenderFrame()
+	{
+		for (RenderData Item : RenderQueueRef->GetRenderItems())
+		{
+			
+		}
 	}
 
 	void Brahmanda::Renderer::EndRenderFrame()
 	{
+		rlImGuiEnd();
 
+		EndDrawing();
 	}
 }

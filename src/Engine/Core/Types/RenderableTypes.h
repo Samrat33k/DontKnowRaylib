@@ -3,7 +3,7 @@
 #pragma once
 
 #include <vector>
-#include "AssetTypes.h"
+#include "HandleTypes.h"
 
 //...
 
@@ -66,5 +66,18 @@ namespace Brahmanda
 	private:
 
 		std::vector<RenderData> RenderItems;
+	};
+
+	struct FrameContextData
+	{
+		FrameContextData(RenderQueue& InQueue) :
+			PrimaryQueue(InQueue)
+		{
+
+		}
+
+		RenderQueue& PrimaryQueue;
+
+		//To be expanded further as per requirement
 	};
 }

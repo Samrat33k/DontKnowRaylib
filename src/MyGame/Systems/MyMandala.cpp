@@ -2,8 +2,9 @@
 
 #include "MyMandala.h"
 #include "Engine/Systems/Logger.h"
+#include "Engine/GameFramework/WorldLayer.h"
+
 #include "MyGame/Maps/GameMap01.h"
-#include "MyGame/Data/Block.h"
 
 //...
 
@@ -23,16 +24,8 @@ bool MyMandala::Init()
 
 	Logger::Info("MyMandala - Init - Called from Derived class");
 
-	WorldLayers.AddLayerAt<GameMap01>(0);
-	GameMap01* Map = static_cast<GameMap01*>(WorldLayers.GetLayerAt(0));
-	
-	Map->Create(30, 10);
-
-	Map->GetBlockUnsafe(0, 0).Type = Block::dirt;
-	Map->GetBlockUnsafe(1, 1).Type = Block::dirt;
-	Map->GetBlockUnsafe(2, 2).Type = Block::dirt;
-	Map->GetBlockUnsafe(3, 3).Type = Block::dirt;
-	Map->GetBlockUnsafe(4, 4).Type = Block::dirt;
+	Brahmanda::WorldLayer& Map = WorldLayers.AddLayerAt<GameMap01>(0);
+	Map.Load();
 
 	return true;
 }

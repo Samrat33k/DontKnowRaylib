@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Engine/Systems/AssetManager.h"
 #include "Engine/Systems/Logger.h"
+#include "Engine/Core/Types/RenderableTypes.h"
 #include "Mandala.h"
 
 //...
@@ -24,7 +25,7 @@ namespace Brahmanda
 		return true;
 	}
 
-	void Game::Cycle(float DeltaTime)
+	void Game::Cycle(float DeltaTime, FrameContextData& InContext)
 	{
 		MandalaRef->Cycle(DeltaTime);
 
@@ -42,9 +43,9 @@ namespace Brahmanda
 		return Manager;
 	}
 
-	void Game::SetAssetManager(Brahmanda::AssetManager* InMgr)
+	void Game::SetAssetManager(AssetManager* InRef)
 	{
-		Manager = InMgr;
+		Manager = InRef;
 	}
 
 	std::unique_ptr<Mandala> Game::ConstructMandala()

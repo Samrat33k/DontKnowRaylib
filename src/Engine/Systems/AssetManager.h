@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <memory>
 
-#include "Engine/Core/Types/AssetTypes.h"
+#include "Engine/Core/Types/HandleTypes.h"
 
 struct Texture;
 struct Model;

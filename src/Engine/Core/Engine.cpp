@@ -2,10 +2,10 @@
 
 #include "Engine.h"
 
-#include "ModuleIncludes.h"
 #include "IGame.h"
 #include "Engine/Systems/AssetManager.h"
 #include "Engine/Core/Renderer.h"
+#include "Engine/Core/Types/RenderableTypes.h"
 #include "Engine/Systems/Logger.h"
 
 //...
@@ -36,21 +36,17 @@ namespace Brahmanda
 
 	void Engine::CycleEngine(float DeltaTime)
 	{
-		BeginDrawing();
-		ClearBackground(RAYWHITE);
-
-		rlImGuiBegin();
+		FrameContextData CtxData(*RendererRef->GetRenderQueue());
+		RendererRef->BeginRenderFrame();
 
 		if (GameRef)
 		{
-			GameRef->Cycle(DeltaTime);
+			GameRef->Cycle(DeltaTime, CtxData);
 		}
 
-		RendererRef->CycleRenderer();
+		RendererRef->RenderFrame();
 
-		rlImGuiEnd();
-
-		EndDrawing();
+		RendererRef->EndRenderFrame();
 	}
 
 	void Engine::ShutdownEngine()

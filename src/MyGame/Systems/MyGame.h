@@ -10,9 +10,11 @@ namespace Brahmanda
 {
 	struct TextureHandle;
 	class AssetManager;
+	class Mandala;
+	class FrameContextData;
 }
 
-class Brahmanda::Mandala;
+
 
 class MyGame : public Brahmanda::Game
 {
@@ -22,7 +24,7 @@ public:
 	~MyGame();
 
 	bool Init() override;
-	void Cycle(float DeltaTime) override;
+	void Cycle(float DeltaTime, Brahmanda::FrameContextData& InContext) override;
 	void Shutdown() override;
 
 	std::unique_ptr<Brahmanda::Mandala> ConstructMandala() override;
