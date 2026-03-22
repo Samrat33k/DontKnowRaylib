@@ -8,6 +8,7 @@ namespace Brahmanda
 {
 	class IGame;
 	class AssetManager;
+	class Renderer;
 
 	class Engine
 	{
@@ -31,5 +32,6 @@ namespace Brahmanda
 
 		IGame* GameRef = nullptr;
 		std::unique_ptr<Brahmanda::AssetManager> GlobalAssetManager;
+		std::unique_ptr<Renderer> RendererRef;
 	};
 }

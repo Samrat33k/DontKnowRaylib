@@ -19,6 +19,9 @@ namespace Brahmanda
 
 		void Load();
 		void Unload();
+
+		virtual void OnLoad();
+		virtual void OnUnload();
 		
 		bool GetIsLoaded() const;
 		bool GetIsVisible() const;

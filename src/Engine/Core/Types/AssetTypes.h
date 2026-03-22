@@ -29,7 +29,7 @@ namespace Brahmanda
 		AssetHandle() = default;
 
 		AssetHandle(uint32_t InID, EAssetType InType, IAssetBridge* InMgrRef)
-			: AssetID(InID), AssetType(InType), ManagerRef(InMgrRef)
+			: AssetID(InID), bIsVisible(true), AssetType(InType), ManagerRef(InMgrRef)
 		{
 
 		}
@@ -37,6 +37,7 @@ namespace Brahmanda
 		AssetHandle(const AssetHandle& Other)
 		{
 			AssetID = Other.AssetID;
+			bIsVisible = Other.bIsVisible;
 			AssetType = Other.AssetType;
 			ManagerRef = Other.ManagerRef;
 
@@ -46,10 +47,12 @@ namespace Brahmanda
 		AssetHandle(AssetHandle&& Other) noexcept
 		{
 			AssetID = Other.AssetID;
+			bIsVisible = Other.bIsVisible;
 			AssetType = Other.AssetType;
 			ManagerRef = Other.ManagerRef;
 
 			Other.AssetID = 0U;
+			Other.bIsVisible = false;
 			Other.AssetType = EAssetType::EAT_NONE;
 			Other.ManagerRef = nullptr;
 		}
@@ -69,6 +72,7 @@ namespace Brahmanda
 			Release();
 
 			AssetID = Other.AssetID;
+			bIsVisible = Other.bIsVisible;
 			AssetType = Other.AssetType;
 			ManagerRef = Other.ManagerRef;
 
@@ -82,6 +86,7 @@ namespace Brahmanda
 			Release();
 
 			AssetID = 0U;
+			bIsVisible = false;
 			AssetType = EAssetType::EAT_NONE;
 			ManagerRef = nullptr;
 		}
@@ -96,7 +101,18 @@ namespace Brahmanda
 			return AssetID != 0 && ManagerRef != nullptr;
 		}
 
+		bool GetIsVisible() const
+		{
+			return bIsVisible;
+		}
+
+		void SetIsVisible(bool InNewState)
+		{
+			bIsVisible = InNewState;
+		}
+
 	private:
+
 		void AddRef()
 		{
 			if (AssetID && ManagerRef)
@@ -116,12 +132,15 @@ namespace Brahmanda
 			}
 
 			AssetID = 0U;
+			bIsVisible = false;
 			AssetType = EAssetType::EAT_NONE;
 			ManagerRef = nullptr;
 		}
 		
 	private:
+
 		uint32_t AssetID = 0U;
+		bool bIsVisible = true;
 		EAssetType AssetType = EAssetType::EAT_NONE;
 		IAssetBridge* ManagerRef = nullptr;
 	};

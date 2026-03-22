@@ -19,11 +19,25 @@ namespace Brahmanda
 	void WorldLayer::Load()
 	{
 		bIsLoaded = true;
+
+		OnLoad();
 	}
 
 	void WorldLayer::Unload()
 	{
+		OnUnload();
+
 		bIsLoaded = false;
+	}
+
+	void WorldLayer::OnLoad()
+	{
+
+	}
+
+	void WorldLayer::OnUnload()
+	{
+
 	}
 
 	bool WorldLayer::GetIsLoaded() const

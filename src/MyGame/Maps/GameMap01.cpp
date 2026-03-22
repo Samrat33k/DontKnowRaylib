@@ -16,6 +16,16 @@ GameMap01::~GameMap01()
 
 }
 
+void GameMap01::OnLoad()
+{
+
+}
+
+void GameMap01::OnUnload()
+{
+
+}
+
 void GameMap01::Create(int InW, int InH)
 {
 	*this = {};
@@ -32,12 +42,18 @@ void GameMap01::Create(int InW, int InH)
 
 Block& GameMap01::GetBlockUnsafe(int InX, int InY)
 {
-	//Logger::Fatal("Unsafe");
+	assert(MapData.size() == w * h && "MapData not Initialized!");
+	assert(InX >= 0 || InY >= 0 || InX < w || InY < h && "GetBlockUnsafe Out of Bounds error!");
 
 	return MapData[InX + InY * w];
 }
 
 Block* GameMap01::GetBlockSafe(int InX, int InY)
 {
+	if (InX < 0 || InY < 0 || InX >= w || InY >= h)
+	{
+		return nullptr;
+	}
+
 	return &MapData[InX + InY * w];
 }

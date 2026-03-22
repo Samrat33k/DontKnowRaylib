@@ -5,6 +5,7 @@
 #include "ModuleIncludes.h"
 #include "IGame.h"
 #include "Engine/Systems/AssetManager.h"
+#include "Engine/Core/Renderer.h"
 #include "Engine/Systems/Logger.h"
 
 //...
@@ -21,6 +22,8 @@ namespace Brahmanda
 		Logger::InitLogger();
 
 		GlobalAssetManager = std::make_unique<AssetManager>();
+		RendererRef = std::make_unique<Renderer>();
+		RendererRef->InitRenderer();
 
 		if (GameRef)
 		{
@@ -42,6 +45,8 @@ namespace Brahmanda
 		{
 			GameRef->Cycle(DeltaTime);
 		}
+
+		RendererRef->CycleRenderer();
 
 		rlImGuiEnd();
 

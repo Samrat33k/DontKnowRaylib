@@ -17,6 +17,9 @@ public:
 	GameMap01();
 	~GameMap01();
 
+	void OnLoad() override;
+	void OnUnload() override;
+
 	void Create(int InW, int InH);
 	Block& GetBlockUnsafe(int InX, int InY);
 	Block* GetBlockSafe(int InX, int InY);
