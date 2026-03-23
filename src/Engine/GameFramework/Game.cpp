@@ -27,7 +27,7 @@ namespace Brahmanda
 
 	void Game::Cycle(float DeltaTime, FrameContextData& InContext)
 	{
-		MandalaRef->Cycle(DeltaTime);
+		MandalaRef->Cycle(DeltaTime, InContext);
 
 	}
 

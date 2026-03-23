@@ -13,7 +13,7 @@
 
 namespace Brahmanda
 {
-	class RenderQueue;
+	class FrameContextData;
 	class WorldLayer;
 
 	struct WorldConfig
@@ -44,7 +44,7 @@ namespace Brahmanda
 		virtual ~Mandala();
 
 		virtual bool Init();
-		virtual void Cycle(float DeltaTime);
+		virtual void Cycle(float DeltaTime, FrameContextData& InContext);
 		virtual void Shutdown();
 
 		//void AddLayerToCollection();
@@ -56,6 +56,5 @@ namespace Brahmanda
 
 		uint16_t ActiveWorldLayerCount = 0;
 		WorldLayerCollection<Config::World::MAX_WORLD_LAYER_COUNT> Collection;
-		RenderQueue* RenderQueueRef = nullptr;
 	};
 }

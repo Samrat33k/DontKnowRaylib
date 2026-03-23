@@ -3,6 +3,7 @@
 #include "MyMandala.h"
 #include "Engine/Systems/Logger.h"
 #include "Engine/GameFramework/WorldLayer.h"
+#include "Engine/Core/Types/RenderableTypes.h"
 
 #include "MyGame/Maps/GameMap01.h"
 
@@ -30,9 +31,9 @@ bool MyMandala::Init()
 	return true;
 }
 
-void MyMandala::Cycle(float DeltaTime)
+void MyMandala::Cycle(float DeltaTime, Brahmanda::FrameContextData& InContext)
 {
-	PARENT::Cycle(DeltaTime);
+	PARENT::Cycle(DeltaTime, InContext);
 
 
 }

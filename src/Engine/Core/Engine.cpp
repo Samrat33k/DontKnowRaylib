@@ -25,26 +25,35 @@ namespace Brahmanda
 		RendererRef = std::make_unique<Renderer>();
 		RendererRef->InitRenderer();
 
+		RenderQueueRef = std::make_unique<RenderQueue>();
+		RenderQueueRef->ReserveSize(1000);
+		RenderQueueRef->Clear();
+
 		if (GameRef)
 		{
 			GameRef->SetAssetManager(GlobalAssetManager.get());
 			GameRef->Init();
+
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	void Engine::CycleEngine(float DeltaTime)
 	{
-		FrameContextData CtxData(*RendererRef->GetRenderQueue());
+		RenderQueue& Queue = *RenderQueueRef;
+		Queue.Clear();
+
 		RendererRef->BeginRenderFrame();
 
 		if (GameRef)
 		{
-			GameRef->Cycle(DeltaTime, CtxData);
+			FrameContextData FrameContext(Queue);
+			GameRef->Cycle(DeltaTime, FrameContext);
 		}
 
-		RendererRef->RenderFrame();
+		RendererRef->RenderFrame(Queue);
 
 		RendererRef->EndRenderFrame();
 	}

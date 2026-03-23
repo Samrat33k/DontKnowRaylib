@@ -18,15 +18,12 @@ namespace Brahmanda
 		void InitRenderer();
 
 		void BeginRenderFrame();
-		void RenderFrame();
+		void RenderFrame(const RenderQueue& InRenderQueue);
 		void EndRenderFrame();
 		
 		void ShutdownRenderer();
 
-		RenderQueue* GetRenderQueue();
-
 	private:
 
-		std::unique_ptr<RenderQueue> RenderQueueRef;
 	};
 }

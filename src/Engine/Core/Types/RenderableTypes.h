@@ -76,6 +76,9 @@ namespace Brahmanda
 
 		}
 
+		FrameContextData(const FrameContextData&) = default;
+		FrameContextData operator=(const FrameContextData&) = delete;
+
 		RenderQueue& PrimaryQueue;
 
 		//To be expanded further as per requirement

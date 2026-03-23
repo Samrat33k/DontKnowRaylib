@@ -15,7 +15,7 @@ public:
 	virtual ~MyMandala() override;
 
 	bool Init() override;
-	void Cycle(float DeltaTime) override;
+	void Cycle(float DeltaTime, Brahmanda::FrameContextData& InContext) override;
 	void Shutdown() override;
 
 private:

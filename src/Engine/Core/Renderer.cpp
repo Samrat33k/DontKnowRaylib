@@ -20,20 +20,13 @@ namespace Brahmanda
 
 	void Brahmanda::Renderer::InitRenderer()
 	{
-		RenderQueueRef = std::make_unique<RenderQueue>();
-		RenderQueueRef->ReserveSize();
-		RenderQueueRef->Clear();
+
 
 	}
 
 	void Brahmanda::Renderer::ShutdownRenderer()
 	{
 
-	}
-
-	RenderQueue* Renderer::GetRenderQueue()
-	{
-		return RenderQueueRef.get();
 	}
 
 	void Brahmanda::Renderer::BeginRenderFrame()
@@ -44,9 +37,9 @@ namespace Brahmanda
 		rlImGuiBegin();
 	}
 
-	void Renderer::RenderFrame()
+	void Renderer::RenderFrame(const RenderQueue& InRenderQueue)
 	{
-		for (RenderData Item : RenderQueueRef->GetRenderItems())
+		for (RenderData Item : InRenderQueue.GetRenderItems())
 		{
 			
 		}

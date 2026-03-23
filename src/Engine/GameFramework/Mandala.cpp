@@ -25,7 +25,7 @@ namespace Brahmanda
 		return true;
 	}
 
-	void Mandala::Cycle(float DeltaTime)
+	void Mandala::Cycle(float DeltaTime, FrameContextData& InContext)
 	{
 
 	}
