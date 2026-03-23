@@ -22,20 +22,40 @@ namespace Brahmanda
 		MandalaRef = ConstructMandala();
 		MandalaRef->Init();
 
+		OnInit();
+
 		return true;
+	}
+
+	void Game::OnInit()
+	{
+
 	}
 
 	void Game::Cycle(float DeltaTime, FrameContextData& InContext)
 	{
+		OnCycle(DeltaTime);
+
 		MandalaRef->Cycle(DeltaTime, InContext);
+	}
+
+	void Game::OnCycle(float DeltaTime)
+	{
 
 	}
 
 	void Game::Shutdown()
 	{
+		OnShutdown();
+
 		MandalaRef->Shutdown();
 
 		//...
+	}
+
+	void Game::OnShutdown()
+	{
+
 	}
 
 	AssetManager* Game::GetAssetManager() const

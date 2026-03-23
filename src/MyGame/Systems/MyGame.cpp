@@ -19,24 +19,18 @@ MyGame::~MyGame()
 
 }
 
-bool MyGame::Init()
+void MyGame::OnInit()
 {
-	PARENT::Init();
-
 	ManagerRef = GetAssetManager();
 
 	TestTex = ManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	TestTex1 = ManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	TestTex2 = ManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	TestTex3 = ManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
-
-	return true;
 }
 
-void MyGame::Cycle(float DeltaTime, Brahmanda::FrameContextData& InContext)
+void MyGame::OnCycle(float DeltaTime)
 {
-	PARENT::Cycle(DeltaTime, InContext);
-
 	static float PosX = 500.f;
 	static float PosY = 500.f;
 
@@ -107,10 +101,9 @@ void MyGame::Cycle(float DeltaTime, Brahmanda::FrameContextData& InContext)
 #pragma endregion
 }
 
-void MyGame::Shutdown()
+void MyGame::OnShutdown()
 {
 
-	PARENT::Shutdown();
 }
 
 std::unique_ptr<Brahmanda::Mandala> MyGame::ConstructMandala()

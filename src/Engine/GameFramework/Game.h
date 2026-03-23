@@ -28,9 +28,12 @@ namespace Brahmanda
 		~Game() override;
 
 		bool Init() override;
+		virtual void OnInit();
 		void Cycle(float DeltaTime, FrameContextData& InContext) override;
+		virtual void OnCycle(float DeltaTime);
 		void Shutdown() override;
-		
+		virtual void OnShutdown();
+
 		AssetManager* GetAssetManager() const;
 		void SetAssetManager(Brahmanda::AssetManager* InRef) override;
 

@@ -3,11 +3,15 @@
 #pragma once
 
 #include <vector>
+#include <memory>
+#include <type_traits>
+#include <cassert>
 
 //...
 
 namespace Brahmanda
 {
+	class RenderQueue;
 	class Entity;
 
 	class WorldLayer
@@ -17,11 +21,30 @@ namespace Brahmanda
 		WorldLayer();
 		~WorldLayer();
 
+		WorldLayer(const WorldLayer&) = delete;
+		WorldLayer& operator=(const WorldLayer&) = delete;
+		WorldLayer(WorldLayer&&) = delete;
+		WorldLayer& operator=(WorldLayer&&) = delete;
+
 		void Load();
 		void Unload();
 
 		virtual void OnLoad();
 		virtual void OnUnload();
+
+		template<typename T, typename ...Args>
+		inline T* SpawnEntity(Args && ...InArgs)
+		{
+			static_assert(std::is_base_of_v<Entity, T>, "T must be derived from Entity");
+
+			std::unique_ptr<T> NewEntity = std::make_unique<T>(std::forward<Args>(InArgs)...);
+			T* EntityPtr = NewEntity.get();
+			Entities.emplace_back(std::move(NewEntity));
+
+			return EntityPtr;
+		}
+
+		void SubmitForRender(RenderQueue& InQueue);
 		
 		bool GetIsLoaded() const;
 		bool GetIsVisible() const;
@@ -32,5 +55,7 @@ namespace Brahmanda
 
 		bool bIsLoaded = false;
 		bool bIsVisible = false;
+
+		std::vector<std::unique_ptr<Entity>> Entities;
 	};
 }

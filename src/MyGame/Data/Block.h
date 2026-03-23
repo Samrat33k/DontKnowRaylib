@@ -3,10 +3,11 @@
 #pragma once
 
 #include <cstdint>
+#include "Engine/GameFramework/ECS/Entity.h"
 
 //...
 
-struct Block
+class Block : public Brahmanda::Entity
 {
 public:
 

@@ -9,7 +9,7 @@ int main()
 {
 	Brahmanda::Application App;
 	MyGame NewGame;
-	
+
 	App.ManageGame(&NewGame);
 	if (App.InitApplication())
 	{

@@ -25,7 +25,7 @@ bool MyMandala::Init()
 
 	Logger::Info("MyMandala - Init - Called from Derived class");
 
-	Brahmanda::WorldLayer& Map = WorldLayers.AddLayerAt<GameMap01>(0);
+	Brahmanda::WorldLayer& Map = Collection.AddLayerAt<GameMap01>(0);
 	Map.Load();
 
 	return true;

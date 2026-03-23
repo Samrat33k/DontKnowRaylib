@@ -47,14 +47,14 @@ namespace Brahmanda
 		virtual void Cycle(float DeltaTime, FrameContextData& InContext);
 		virtual void Shutdown();
 
-		//void AddLayerToCollection();
-		//virtual void AddLayerToCollectionCustom();
-
 		void SetWorldConfig(const WorldConfig& InConfig);
+
+	protected:
+
+		WorldLayerCollection<Config::World::MAX_WORLD_LAYER_COUNT> Collection;
 
 	private:
 
 		uint16_t ActiveWorldLayerCount = 0;
-		WorldLayerCollection<Config::World::MAX_WORLD_LAYER_COUNT> Collection;
 	};
 }

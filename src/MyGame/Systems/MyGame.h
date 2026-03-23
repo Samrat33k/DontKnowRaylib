@@ -23,9 +23,9 @@ public:
 	MyGame();
 	~MyGame();
 
-	bool Init() override;
-	void Cycle(float DeltaTime, Brahmanda::FrameContextData& InContext) override;
-	void Shutdown() override;
+	void OnInit() override;
+	void OnCycle(float DeltaTime) override;
+	void OnShutdown() override;
 
 	std::unique_ptr<Brahmanda::Mandala> ConstructMandala() override;
 

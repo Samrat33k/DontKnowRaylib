@@ -27,7 +27,13 @@ namespace Brahmanda
 
 	void Mandala::Cycle(float DeltaTime, FrameContextData& InContext)
 	{
-
+		for (auto& It : Collection.GetLayerList())
+		{
+			if (It && It->GetIsLoaded())
+			{
+				
+			}
+		}
 	}
 
 	void Mandala::Shutdown()

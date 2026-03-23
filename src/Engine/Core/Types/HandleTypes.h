@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 namespace Brahmanda
 {
 	enum class EAssetType

@@ -2,6 +2,11 @@
 
 #include "WorldLayer.h"
 
+#include "Engine/Core/Types/RenderableTypes.h"
+#include "Engine/Core/Types/HandleTypes.h"
+#include "Engine/Core/Types/CustomTypes.h"
+#include "Engine/GameFramework/ECS/Entity.h"
+
 //...
 
 namespace Brahmanda
@@ -40,10 +45,16 @@ namespace Brahmanda
 
 	}
 
+	void WorldLayer::SubmitForRender(RenderQueue& InQueue)
+	{
+		
+	}
+
 	bool WorldLayer::GetIsLoaded() const
 	{
 		return bIsLoaded;
 	}
+
 	bool WorldLayer::GetIsVisible() const
 	{
 		return bIsVisible;

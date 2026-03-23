@@ -20,7 +20,7 @@ namespace Brahmanda
 		void BeginRenderFrame();
 		void RenderFrame(const RenderQueue& InRenderQueue);
 		void EndRenderFrame();
-		
+
 		void ShutdownRenderer();
 
 	private:

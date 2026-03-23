@@ -8,7 +8,7 @@
 
 //...
 
-struct Block;
+class Block;
 
 class GameMap01 : public Brahmanda::WorldLayer
 {
@@ -26,5 +26,6 @@ public:
 
 	int w = 0;
 	int h = 0;
-	std::vector<Block> MapData;
+
+	std::vector<Block*> MapData;
 };

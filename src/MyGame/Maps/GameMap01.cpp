@@ -33,15 +33,14 @@ void GameMap01::OnUnload()
 
 void GameMap01::Create(int InW, int InH)
 {
-	*this = {};
 	MapData.resize(InW * InH);
 
 	w = InW;
 	h = InH;
 
-	for (auto It : MapData)
+	for (Block*& It : MapData)
 	{
-		It = {};
+		It = SpawnEntity<Block>();
 	}
 
 	Logger::Info("GameMap01 - MapData Loaded!");
@@ -52,7 +51,7 @@ Block& GameMap01::GetBlockUnsafe(int InX, int InY)
 	assert(MapData.size() == w * h && "MapData not Initialized!");
 	assert(InX >= 0 || InY >= 0 || InX < w || InY < h && "GetBlockUnsafe Out of Bounds error!");
 
-	return MapData[InX + InY * w];
+	return *MapData[InX + InY * w];
 }
 
 Block* GameMap01::GetBlockSafe(int InX, int InY)
@@ -62,5 +61,5 @@ Block* GameMap01::GetBlockSafe(int InX, int InY)
 		return nullptr;
 	}
 
-	return &MapData[InX + InY * w];
+	return MapData[InX + InY * w];
 }

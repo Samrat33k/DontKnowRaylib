@@ -10,6 +10,7 @@
 #include "Engine/Core/Types/HandleTypes.h"
 
 struct Texture;
+struct Geometry;
 struct Model;
 
 namespace Brahmanda
@@ -53,7 +54,17 @@ namespace Brahmanda
 			std::string PathToAsset = "";
 		};
 
+		struct GeometryEntry
+		{
+			//std::unique_ptr<Geometry> Data;
+			uint32_t RefCount = 0U;
+			std::string PathToAsset = "";
+		};
+
 		std::unordered_map<uint32_t, TextureEntry> LoadedTextureList;
 		std::unordered_map<std::string, uint32_t> LoadedTextureIDs;
+
+		std::unordered_map<uint32_t, GeometryEntry> LoadedGeometryList;
+		std::unordered_map<std::string, uint32_t> LoadedGeometryIDs;
 	};
 }
