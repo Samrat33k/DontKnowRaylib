@@ -13,12 +13,19 @@ namespace Brahmanda
 	{
 	public:
 
-		Entity() = default;
+		Entity(const RenderTransform& InTransform)
+			: Transform(InTransform)
+		{
+
+		}
+		
+		Entity() = delete;
+
 		~Entity() = default;
 
-		TextureHandle Tex;
-		GeometryHandle Geo;
+		TextureHandle Tex = {};
+		GeometryHandle Geo = {};
 
-		RenderTransform Transform;
+		RenderTransform Transform = {};
 	};
 }

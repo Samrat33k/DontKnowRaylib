@@ -19,8 +19,15 @@ public:
 		BLOCKS_COUNT
 	};
 
-	Block();
+	Block(const Brahmanda::RenderTransform& InTransform)
+		: Entity(InTransform)
+	{
+
+	}
+
 	~Block();
+
+	void InitBlock();
 
 	uint16_t Type = 0;
 };

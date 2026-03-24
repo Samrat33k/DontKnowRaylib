@@ -7,12 +7,15 @@
 #include <type_traits>
 #include <cassert>
 
+#include "LayerInitData.h"
+
 
 //...
 
 namespace Brahmanda
 {
 	class WorldLayer;
+	class AssetManager;
 
 	enum class ELayerCollectionType
 	{
@@ -53,13 +56,13 @@ namespace Brahmanda
 		}
 
 		template<typename T, typename... Args>
-		T& AddLayerAt(size_t InIndex, Args... InArgs)
+		T& AddLayerAt(size_t InIndex, LayerInitData& InData, Args... InArgs)
 		{
 			static_assert(std::is_base_of_v<Brahmanda::WorldLayer, T>, "T must derive from WorldLayer");
 			assert(InIndex < MaxSize);
 			assert(!WorldLayerList[InIndex] && "Layer already exists at Index");
 
-			std::unique_ptr<T> Ptr = std::make_unique<T>(std::forward<Args>(InArgs)...);
+			std::unique_ptr<T> Ptr = std::make_unique<T>(std::forward<LayerInitData>(InData), std::forward<Args>(InArgs)...);
 			T& Ref = *Ptr;
 
 			WorldLayerList[InIndex] = std::move(Ptr);
@@ -69,12 +72,12 @@ namespace Brahmanda
 		}
 
 		template<typename T, typename... Args>
-		T& SetLayerAt(size_t InIndex, Args... InArgs)
+		T& SetLayerAt(size_t InIndex, LayerInitData& InData, Args... InArgs)
 		{
 			static_assert(std::is_base_of_v<Brahmanda::WorldLayer, T>, "T must derive from WorldLayer");
 			assert(InIndex < MaxSize);
 
-			std::unique_ptr<T> Ptr = std::make_unique<T>(std::forward<Args>(InArgs)...);
+			std::unique_ptr<T> Ptr = std::make_unique<T>(std::forward<LayerInitData>(InData), std::forward<Args>(InArgs)...);
 			T& Ref = *Ptr;
 
 			WorldLayerList[InIndex] = std::move(Ptr);

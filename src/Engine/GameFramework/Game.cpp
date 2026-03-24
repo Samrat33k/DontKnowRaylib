@@ -21,6 +21,7 @@ namespace Brahmanda
 
 		MandalaRef = ConstructMandala();
 		MandalaRef->Init();
+		MandalaRef->SetAssetManager(Manager);
 
 		OnInit();
 

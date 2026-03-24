@@ -31,7 +31,7 @@ namespace Brahmanda
 		{
 			if (It && It->GetIsLoaded())
 			{
-				
+				It->SubmitForRender(InContext.PrimaryQueue);
 			}
 		}
 	}
@@ -44,5 +44,11 @@ namespace Brahmanda
 	void Mandala::SetWorldConfig(const WorldConfig& InConfig)
 	{
 		
+	}
+
+	void Mandala::SetAssetManager(AssetManager* InRef)
+	{
+		Manager = InRef;
+		LayerData.AssetMgr = InRef;
 	}
 }

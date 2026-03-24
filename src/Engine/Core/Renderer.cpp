@@ -3,6 +3,8 @@
 #include "Renderer.h"
 #include "ModuleIncludes.h"
 #include "Engine/Systems/Logger.h"
+#include "raylib.h"
+#include "Engine/Systems/AssetManager.h"
 
 //...
 
@@ -18,9 +20,9 @@ namespace Brahmanda
 
 	}
 
-	void Brahmanda::Renderer::InitRenderer()
+	void Brahmanda::Renderer::InitRenderer(AssetManager* InRef)
 	{
-
+		AssetManagerRef = InRef;
 
 	}
 
@@ -41,7 +43,12 @@ namespace Brahmanda
 	{
 		for (RenderData Item : InRenderQueue.GetRenderItems())
 		{
-			
+ 			Texture* Tex = AssetManagerRef->GetTexture(Item.Tex);
+
+			if (Tex)
+			{
+				DrawTexturePro(*Tex, { 0, 0, (float)Tex->width, (float)Tex->height }, { 150, 150, 100, 100 }, {}, 0, WHITE);
+			}
 		}
 	}
 

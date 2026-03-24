@@ -8,6 +8,7 @@
 #include "GameConfig.h"
 #include "WorldLayer.h"
 #include "WorldLayerCollection.h"
+#include "LayerInitData.h"
 
 //...
 
@@ -15,6 +16,7 @@ namespace Brahmanda
 {
 	class FrameContextData;
 	class WorldLayer;
+	class AssetManager;
 
 	struct WorldConfig
 	{
@@ -48,13 +50,16 @@ namespace Brahmanda
 		virtual void Shutdown();
 
 		void SetWorldConfig(const WorldConfig& InConfig);
+		void SetAssetManager(AssetManager* InRef);
 
 	protected:
 
 		WorldLayerCollection<Config::World::MAX_WORLD_LAYER_COUNT> Collection;
+		LayerInitData LayerData;
 
 	private:
 
+		AssetManager* Manager = nullptr;
 		uint16_t ActiveWorldLayerCount = 0;
 	};
 }

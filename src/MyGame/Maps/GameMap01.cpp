@@ -3,12 +3,16 @@
 #include "GameMap01.h"
 #include "MyGame/Data/Block.h"
 #include "Engine/Systems/Logger.h"
+#include "Engine/Core/Types/CustomTypes.h"
+
 
 //...
 
-GameMap01::GameMap01()
+
+GameMap01::GameMap01(const Brahmanda::LayerInitData& InData)
+	: WorldLayer(InData)
 {
-	Logger::Info("Constructed GameMap01!");
+
 }
 
 GameMap01::~GameMap01()
@@ -38,9 +42,17 @@ void GameMap01::Create(int InW, int InH)
 	w = InW;
 	h = InH;
 
+	int i = 1;
 	for (Block*& It : MapData)
 	{
-		It = SpawnEntity<Block>();
+		Brahmanda::RenderTransform Transform;
+		Transform.Pos[0] = 0.f + 50 * i;
+		Transform.Pos[1] = 0.f + 50 * i;
+		Transform.Pos[2] = 0.f + 50 * i;
+
+		It = SpawnEntity<Block>(Transform);
+		
+		i++;
 	}
 
 	Logger::Info("GameMap01 - MapData Loaded!");

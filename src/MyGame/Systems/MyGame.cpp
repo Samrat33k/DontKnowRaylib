@@ -36,7 +36,7 @@ void MyGame::OnCycle(float DeltaTime)
 
 	if (Texture* Tex = ManagerRef->GetTexture(TestTex))
 	{
-		DrawTexturePro(*Tex, { 0, 0, (float)Tex->width, (float)Tex->height }, { 50, 50, 100, 100 }, {}, 0, WHITE);
+		//DrawTexturePro(*Tex, { 0, 0, (float)Tex->width, (float)Tex->height }, { 50, 50, 100, 100 }, {}, 0, WHITE);
 	}
 
 	if (IsKeyDown(KEY_W))
@@ -51,7 +51,7 @@ void MyGame::OnCycle(float DeltaTime)
 
 		if (Texture* Tex = ManagerRef->GetTexture(TestTex1))
 		{
-			DrawTexturePro(*Tex, { 0, 0, (float)Tex->width, (float)Tex->height }, { 150, 150, 100, 100 }, {}, 0, WHITE);
+			//DrawTexturePro(*Tex, { 0, 0, (float)Tex->width, (float)Tex->height }, { 150, 150, 100, 100 }, {}, 0, WHITE);
 		}
 	}
 	if (IsKeyDown(KEY_D))

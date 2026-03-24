@@ -7,20 +7,25 @@
 #include <type_traits>
 #include <cassert>
 
+#include "LayerInitData.h"
+
 //...
 
 namespace Brahmanda
 {
 	class RenderQueue;
+	class AssetManager;
 	class Entity;
 
 	class WorldLayer
 	{
 	public:
 
-		WorldLayer();
+		WorldLayer(const LayerInitData& InData);
+
 		~WorldLayer();
 
+		WorldLayer() = delete;
 		WorldLayer(const WorldLayer&) = delete;
 		WorldLayer& operator=(const WorldLayer&) = delete;
 		WorldLayer(WorldLayer&&) = delete;
@@ -49,6 +54,7 @@ namespace Brahmanda
 		bool GetIsLoaded() const;
 		bool GetIsVisible() const;
 
+		void SetAssetManager(AssetManager* InRef);
 		//std::vector<Entity> Entities;
 
 	private:
@@ -57,5 +63,7 @@ namespace Brahmanda
 		bool bIsVisible = false;
 
 		std::vector<std::unique_ptr<Entity>> Entities;
+
+		AssetManager* AssetManagerRef = nullptr;
 	};
 }

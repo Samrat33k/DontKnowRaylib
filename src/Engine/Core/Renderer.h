@@ -9,13 +9,15 @@
 
 namespace Brahmanda
 {
+	class AssetManager;
+
 	class Renderer
 	{
 	public:
 		Renderer();
 		~Renderer();
 
-		void InitRenderer();
+		void InitRenderer(AssetManager* InRef);
 
 		void BeginRenderFrame();
 		void RenderFrame(const RenderQueue& InRenderQueue);
@@ -25,5 +27,6 @@ namespace Brahmanda
 
 	private:
 
+		AssetManager* AssetManagerRef = nullptr;
 	};
 }

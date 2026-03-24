@@ -23,7 +23,7 @@ namespace Brahmanda
 
 		GlobalAssetManager = std::make_unique<AssetManager>();
 		RendererRef = std::make_unique<Renderer>();
-		RendererRef->InitRenderer();
+		RendererRef->InitRenderer(GlobalAssetManager.get());
 
 		RenderQueueRef = std::make_unique<RenderQueue>();
 		RenderQueueRef->ReserveSize(1000);
