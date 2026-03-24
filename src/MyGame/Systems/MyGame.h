@@ -31,10 +31,5 @@ public:
 
 private:
 
-	Brahmanda::TextureHandle TestTex;
-	Brahmanda::TextureHandle TestTex1;
-	Brahmanda::TextureHandle TestTex2;
-	Brahmanda::TextureHandle TestTex3;
-
 	Brahmanda::AssetManager* ManagerRef = nullptr;
 };

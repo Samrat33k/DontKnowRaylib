@@ -37,7 +37,7 @@ namespace Brahmanda
 		NewEntry.RefCount += 1;
 		NewEntry.PathToAsset = InPath;
 		LoadedTextureList[TexID] = std::move(NewEntry);
-		Logger::Info("New texture loaded.TexID: {}, Ref count: {}", TexID, LoadedTextureList[TexID].RefCount);
+		//Logger::Info("New texture loaded.TexID: {}, Ref count: {}", TexID, LoadedTextureList[TexID].RefCount);
 
 		return TextureHandle(TexID, this);
 	}
@@ -82,14 +82,14 @@ namespace Brahmanda
 
 		It->second.RefCount--;
 
-		Logger::Info("Released Texture handle. TexId: {}, Ref count: {}", ID, It->second.RefCount);
+		//Logger::Info("Released Texture handle. TexId: {}, Ref count: {}", ID, It->second.RefCount);
 
 		if (It->second.RefCount == 0)
 		{
 			auto Path = It->second.PathToAsset;
 			Texture* Tex = It->second.Data.get();
 
-			Logger::Info("Unloaded Texture. TexId: {}, Ref count: {}", ID, It->second.RefCount);
+			//Logger::Info("Unloaded Texture. TexId: {}, Ref count: {}", ID, It->second.RefCount);
 
 			UnloadTexture(*Tex);
 			LoadedTextureIDs.erase(Path);
@@ -114,14 +114,14 @@ namespace Brahmanda
 
 		It->second.RefCount--;
 
-		Logger::Info("Released DD Texture handle. TexId: {}, Ref count: {}", InID, It->second.RefCount);
+		//Logger::Info("Released DD Texture handle. TexId: {}, Ref count: {}", InID, It->second.RefCount);
 
 		if (It->second.RefCount == 0)
 		{
 			auto Path = It->second.PathToAsset;
 			Texture* Tex = It->second.Data.get();
 
-			Logger::Info("Unloaded DD Texture. TexId: {}, Ref count: {}", InID, It->second.RefCount);
+			//Logger::Info("Unloaded DD Texture. TexId: {}, Ref count: {}", InID, It->second.RefCount);
 
 			UnloadTexture(*Tex);
 			LoadedTextureIDs.erase(Path);

@@ -19,28 +19,25 @@ MyMandala::~MyMandala()
 
 }
 
-bool MyMandala::Init()
+void MyMandala::OnInit()
 {
-	PARENT::Init();
-
 	Logger::Info("MyMandala - Init - Called from Derived class");
+}
 
+void MyMandala::PostInit()
+{
 	Brahmanda::WorldLayer& Map = Collection.AddLayerAt<GameMap01>(0, LayerData);
 	Map.Load();
-
-	return true;
 }
 
-void MyMandala::Cycle(float DeltaTime, Brahmanda::FrameContextData& InContext)
+void MyMandala::OnCycle(float DeltaTime)
 {
-	PARENT::Cycle(DeltaTime, InContext);
-
 
 }
 
-void MyMandala::Shutdown()
+void MyMandala::OnShutdown()
 {
 	Logger::Info("MyMandala - Shutdown - Called from Derived class");
 
-	PARENT::Shutdown();
+	//...
 }

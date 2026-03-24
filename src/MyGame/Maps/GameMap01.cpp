@@ -5,14 +5,12 @@
 #include "Engine/Systems/Logger.h"
 #include "Engine/Core/Types/CustomTypes.h"
 
-
 //...
-
 
 GameMap01::GameMap01(const Brahmanda::LayerInitData& InData)
 	: WorldLayer(InData)
 {
-
+	Logger::Info("GameMap01 Loaded!");
 }
 
 GameMap01::~GameMap01()
@@ -42,16 +40,23 @@ void GameMap01::Create(int InW, int InH)
 	w = InW;
 	h = InH;
 
+	Brahmanda::TextureHandle Tx;
+	if (!AssetManagerRef->GetIsShuttingDown())
+	{
+		Tx = AssetManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
+	}
+
 	int i = 1;
 	for (Block*& It : MapData)
 	{
 		Brahmanda::RenderTransform Transform;
-		Transform.Pos[0] = 0.f + 50 * i;
-		Transform.Pos[1] = 0.f + 50 * i;
-		Transform.Pos[2] = 0.f + 50 * i;
+		Transform.Pos[0] = 0.f + 100 * i;
+		Transform.Pos[1] = 0.f + 100 * i;
+		Transform.Pos[2] = 0.f + 100 * i;
 
 		It = SpawnEntity<Block>(Transform);
-		
+		It->Tex = Tx;
+
 		i++;
 	}
 

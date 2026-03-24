@@ -8,6 +8,7 @@
 #include <cassert>
 
 #include "LayerInitData.h"
+#include "Engine/Systems/AssetManager.h"
 
 //...
 
@@ -57,13 +58,15 @@ namespace Brahmanda
 		void SetAssetManager(AssetManager* InRef);
 		//std::vector<Entity> Entities;
 
+	protected:
+
+		AssetManager* AssetManagerRef = nullptr;
+
 	private:
 
 		bool bIsLoaded = false;
 		bool bIsVisible = false;
 
 		std::vector<std::unique_ptr<Entity>> Entities;
-
-		AssetManager* AssetManagerRef = nullptr;
 	};
 }

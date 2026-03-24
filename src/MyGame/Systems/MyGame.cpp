@@ -23,10 +23,6 @@ void MyGame::OnInit()
 {
 	ManagerRef = GetAssetManager();
 
-	TestTex = ManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
-	TestTex1 = ManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
-	TestTex2 = ManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
-	TestTex3 = ManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 }
 
 void MyGame::OnCycle(float DeltaTime)
@@ -34,25 +30,13 @@ void MyGame::OnCycle(float DeltaTime)
 	static float PosX = 500.f;
 	static float PosY = 500.f;
 
-	if (Texture* Tex = ManagerRef->GetTexture(TestTex))
-	{
-		//DrawTexturePro(*Tex, { 0, 0, (float)Tex->width, (float)Tex->height }, { 50, 50, 100, 100 }, {}, 0, WHITE);
-	}
-
 	if (IsKeyDown(KEY_W))
 	{
 		PosY += -1 * 100 * DeltaTime;
-		TestTex.ReleaseHandle();
-		//Manager->ReqUnloadTexture(TestTex);
 	}
 	if (IsKeyDown(KEY_S))
 	{
 		PosY += 1 * 100 * DeltaTime;
-
-		if (Texture* Tex = ManagerRef->GetTexture(TestTex1))
-		{
-			//DrawTexturePro(*Tex, { 0, 0, (float)Tex->width, (float)Tex->height }, { 150, 150, 100, 100 }, {}, 0, WHITE);
-		}
 	}
 	if (IsKeyDown(KEY_D))
 	{
@@ -93,8 +77,8 @@ void MyGame::OnCycle(float DeltaTime)
 	ImGui::Text("This is options window");
 	ImGui::Separator();
 	ImGui::NewLine();
-	static float SliderVal1 = 0.f;
-	ImGui::SliderFloat("Some Slider", &SliderVal1, 0.f, 1.f);
+	float FPS = 1.f / DeltaTime;
+	ImGui::Text("FPS: %.2f s (%.2f ms)", FPS, DeltaTime * 1000.f);
 
 	ImGui::End();
 

@@ -21,7 +21,7 @@ namespace Brahmanda
 #endif
 
 		SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-		InitWindow(1280, 720, "Brahmanda Engine 0.0a");
+		InitWindow(1280, 720, "Brahmanda Engine 0.001a");
 		SetTargetFPS(240);
 
 		rlImGuiSetup(true);

@@ -22,11 +22,25 @@ namespace Brahmanda
 	{
 		Logger::Info("Mandala - Init - Called from Base class!");
 
+		OnInit();
+
 		return true;
+	}
+
+	void Mandala::OnInit()
+	{
+
+	}
+
+	void Mandala::PostInit()
+	{
+
 	}
 
 	void Mandala::Cycle(float DeltaTime, FrameContextData& InContext)
 	{
+		OnCycle(DeltaTime);
+
 		for (auto& It : Collection.GetLayerList())
 		{
 			if (It && It->GetIsLoaded())
@@ -36,9 +50,21 @@ namespace Brahmanda
 		}
 	}
 
+	void Mandala::OnCycle(float DeltaTime)
+	{
+
+	}
+
 	void Mandala::Shutdown()
 	{
+		OnShutdown();
+
 		Logger::Info("Mandala - Shutdown - Called from Base class!");
+	}
+
+	void Mandala::OnShutdown()
+	{
+
 	}
 
 	void Mandala::SetWorldConfig(const WorldConfig& InConfig)
@@ -50,5 +76,7 @@ namespace Brahmanda
 	{
 		Manager = InRef;
 		LayerData.AssetMgr = InRef;
+
+		PostInit();
 	}
 }

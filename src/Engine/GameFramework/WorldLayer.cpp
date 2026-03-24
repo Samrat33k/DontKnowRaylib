@@ -6,7 +6,6 @@
 #include "Engine/Core/Types/HandleTypes.h"
 #include "Engine/Core/Types/CustomTypes.h"
 #include "Engine/GameFramework/ECS/Entity.h"
-#include "Engine/Systems/AssetManager.h"
 
 //...
 
@@ -14,7 +13,7 @@ namespace Brahmanda
 {
 	WorldLayer::WorldLayer(const LayerInitData& InData)
 	{
-
+		AssetManagerRef = InData.AssetMgr;
 	}
 
 	WorldLayer::~WorldLayer()

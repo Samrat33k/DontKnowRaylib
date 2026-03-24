@@ -45,9 +45,13 @@ namespace Brahmanda
 		Mandala();
 		virtual ~Mandala();
 
-		virtual bool Init();
-		virtual void Cycle(float DeltaTime, FrameContextData& InContext);
-		virtual void Shutdown();
+		bool Init();
+		virtual void OnInit();
+		virtual void PostInit();
+		void Cycle(float DeltaTime, FrameContextData& InContext);
+		virtual void OnCycle(float DeltaTime);
+		void Shutdown();
+		virtual void OnShutdown();
 
 		void SetWorldConfig(const WorldConfig& InConfig);
 		void SetAssetManager(AssetManager* InRef);
