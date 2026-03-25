@@ -40,10 +40,10 @@ void GameMap01::Create(int InW, int InH)
 	w = InW;
 	h = InH;
 
-	Brahmanda::TextureHandle Tx;
+	Brahmanda::TextureHandle t;
 	if (!AssetManagerRef->GetIsShuttingDown())
 	{
-		Tx = AssetManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
+		t = AssetManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	}
 
 	int i = 1;
@@ -54,10 +54,10 @@ void GameMap01::Create(int InW, int InH)
 		Transform.Pos[1] = 0.f + 101 * (i / 15);
 
 		It = SpawnEntity<Block>(Transform);
-		It->Tex = Tx;
+		It->Tex = t;
 		if (i % 2 == 0)
 		{
-			It->Tex.SetIsVisible(false);
+			//It->Tex.SetIsVisible(false);
 		}
 
 		i++;

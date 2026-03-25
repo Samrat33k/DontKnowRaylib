@@ -23,15 +23,6 @@ namespace Brahmanda
 
 	void WorldLayer::Load()
 	{
-		for (auto& It : Entities)
-		{
-			if (It)
-			{
-				//Need path based texture loading
-				//It->Tex = AssetManagerRef->ReqLoadTexture(RESOURCE_DIR "Dirt")
-			}
-		}
-
 		bIsLoaded = true;
 
 		OnLoad();
