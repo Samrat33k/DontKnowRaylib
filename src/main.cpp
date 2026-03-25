@@ -16,5 +16,7 @@ int main()
 		App.StartApplicationCycle();
 	}
 
+	App.ShutdownApplication();
+
 	return 0;
 }

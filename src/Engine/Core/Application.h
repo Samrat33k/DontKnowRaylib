@@ -24,6 +24,8 @@ namespace Brahmanda
 		void StartApplicationCycle();
 		void ShutdownApplication();
 
+		void Cleanup();
+
 		void ManageGame(IGame* InGame);
 
 	private:

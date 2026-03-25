@@ -22,6 +22,7 @@ namespace Brahmanda
 		Logger::InitLogger();
 
 		GlobalAssetManager = std::make_unique<AssetManager>();
+		GlobalAssetManager->Init();
 		RendererRef = std::make_unique<Renderer>();
 		RendererRef->InitRenderer(GlobalAssetManager.get());
 

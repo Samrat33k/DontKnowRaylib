@@ -22,6 +22,8 @@ namespace Brahmanda
 		AssetManager();
 		~AssetManager();
 
+		void Init();
+
 		TextureHandle ReqLoadTexture(const std::string& InPath);
 		void AddTextureRef(uint32_t InID);
 		void ReqUnloadTexture(const TextureHandle& InHandle);
@@ -33,7 +35,7 @@ namespace Brahmanda
 
 		void UnloadUnused();
 
-		Texture* GetTexture(const TextureHandle& InHandle);
+		Texture& GetTexture(const TextureHandle& InHandle);
 		Model* GetGeometry(const GeometryHandle& InHandle);
 
 		//Interface Implementation
@@ -46,6 +48,7 @@ namespace Brahmanda
 		uint32_t LastTexID = 0U;
 		uint32_t LastGeoID = 0U;
 		bool bIsShuttingDown = false;
+		std::unique_ptr<Texture> ErrorTexture;
 
 		struct TextureEntry
 		{

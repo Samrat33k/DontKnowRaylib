@@ -52,16 +52,19 @@ namespace Brahmanda
 			DeltaTime = GetFrameTime();
 			EngineRef->CycleEngine(DeltaTime);
 		}
-
-		ShutdownApplication();
 	}
 
 	void Application::ShutdownApplication()
 	{
+		EngineRef->ShutdownEngine();
+
 		rlImGuiShutdown();
 		CloseWindow();
+	}
 
-		EngineRef->ShutdownEngine();
+	void Application::Cleanup()
+	{
+
 	}
 
 	void Application::ManageGame(IGame* InGame)

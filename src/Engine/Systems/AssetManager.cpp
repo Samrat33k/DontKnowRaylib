@@ -19,6 +19,11 @@ namespace Brahmanda
 		bIsShuttingDown = true;
 	}
 
+	void AssetManager::Init()
+	{
+		ErrorTexture = std::make_unique<Texture>(LoadTexture(RESOURCE_DIR "t_error.png"));
+	}
+
 	TextureHandle AssetManager::ReqLoadTexture(const std::string& InPath)
 	{
 		auto It = LoadedTextureIDs.find(InPath);
@@ -145,20 +150,24 @@ namespace Brahmanda
 
 	}
 
-	Texture* AssetManager::GetTexture(const TextureHandle& InHandle)
+	Texture& AssetManager::GetTexture(const TextureHandle& InHandle)
 	{
 		if (!InHandle.GetIsValid()) 
 		{
-			return nullptr;
+			return *ErrorTexture;
 		}
 
 		auto It = LoadedTextureList.find(InHandle.GetID());
 		if (It != LoadedTextureList.end())
 		{
-			return It->second.Data.get();
-		}
+			Texture* t = It->second.Data.get();
+			if (t)
+			{
+				return *t;
+			}
 
-		return nullptr;
+			return *ErrorTexture;
+		}
 	}
 
 	Model* AssetManager::GetGeometry(const GeometryHandle& InHandle)

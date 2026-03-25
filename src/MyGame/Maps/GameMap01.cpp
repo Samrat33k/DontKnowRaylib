@@ -26,6 +26,7 @@ void GameMap01::OnLoad()
 	GetBlockUnsafe(2, 2).Type = Block::dirt;
 	GetBlockUnsafe(3, 3).Type = Block::dirt;
 	GetBlockUnsafe(4, 4).Type = Block::dirt;
+	GetBlockUnsafe(5, 5).Tex.ReleaseHandle();
 }
 
 void GameMap01::OnUnload()
@@ -46,12 +47,12 @@ void GameMap01::Create(int InW, int InH)
 		t = AssetManagerRef->ReqLoadTexture(RESOURCE_DIR "dirt.png");
 	}
 
-	int i = 1;
+	int i = 0;
 	for (Block*& It : MapData)
 	{
 		Brahmanda::RenderTransform Transform;
-		Transform.Pos[0] = 0.f + 101 * (i % 15);
-		Transform.Pos[1] = 0.f + 101 * (i / 15);
+		Transform.Pos[0] = 0.f + 101 * (i % 20);
+		Transform.Pos[1] = 0.f + 101 * (i / 20);
 
 		It = SpawnEntity<Block>(Transform);
 		It->Tex = t;
