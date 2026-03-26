@@ -11,4 +11,3 @@
 
 
 //Third-party Libraries
-#include <spdlog/spdlog.h>

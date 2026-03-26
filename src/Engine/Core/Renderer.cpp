@@ -3,7 +3,6 @@
 #include "Renderer.h"
 #include "ModuleIncludes.h"
 #include "Engine/Systems/Logger.h"
-#include "raylib.h"
 #include "Engine/Systems/AssetManager.h"
 
 //...
@@ -23,7 +22,7 @@ namespace Brahmanda
 	void Brahmanda::Renderer::InitRenderer(AssetManager* InRef)
 	{
 		AssetManagerRef = InRef;
-
+		
 	}
 
 	void Brahmanda::Renderer::ShutdownRenderer()
