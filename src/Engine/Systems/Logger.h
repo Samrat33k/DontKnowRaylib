@@ -30,6 +30,14 @@ namespace Logger
 #endif // ENABLE_LOGGER
 	}
 
+	template<typename... Args>
+	inline void Error(const char* fmt, Args&&... args)
+	{
+#if ENABLE_LOGGER
+		spdlog::error(fmt, std::forward<Args>(args)...);
+#endif // ENABLE_LOGGER
+	}
+
 	inline void Fatal(const char* fmt)
 	{
 #if ENABLE_LOGGER

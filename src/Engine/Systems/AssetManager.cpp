@@ -119,14 +119,14 @@ namespace Brahmanda
 
 		It->second.RefCount--;
 
-		//Logger::Info("Released DD Texture handle. TexId: {}, Ref count: {}", InID, It->second.RefCount);
+		//Logger::Info("Released a Texture handle. TexId: {}, Ref count: {}", InID, It->second.RefCount);
 
 		if (It->second.RefCount == 0)
 		{
 			auto Path = It->second.PathToAsset;
 			Texture* Tex = It->second.Data.get();
 
-			//Logger::Info("Unloaded DD Texture. TexId: {}, Ref count: {}", InID, It->second.RefCount);
+			//Logger::Info("Unloaded a Texture. TexId: {}, Ref count: {}", InID, It->second.RefCount);
 
 			UnloadTexture(*Tex);
 			LoadedTextureIDs.erase(Path);
@@ -165,9 +165,9 @@ namespace Brahmanda
 			{
 				return *t;
 			}
-
-			return *ErrorTexture;
 		}
+
+		return *ErrorTexture;
 	}
 
 	Model* AssetManager::GetGeometry(const GeometryHandle& InHandle)

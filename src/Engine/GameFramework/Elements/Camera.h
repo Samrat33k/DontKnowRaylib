@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "Engine/Core/Types/CustomTypes.h"
+
 //...
 
 namespace Brahmanda
@@ -12,5 +14,17 @@ namespace Brahmanda
 
 		Camera();
 		~Camera();
+
+		virtual void Reset() = 0;
+	};
+
+	class Camera2D : public Camera
+	{
+
+	};
+
+	class Camera3D : public Camera
+	{
+
 	};
 }
