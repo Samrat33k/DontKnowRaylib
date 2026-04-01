@@ -59,6 +59,14 @@ namespace Brahmanda
 		}
 	}
 
+	void WorldLayer::RegisterEntity(Entity& InEntity)
+	{
+		if (InEntity.Tex.GetIsVisible())
+		{
+			Renderables.emplace_back(InEntity.Tex, &(InEntity.Transform));
+		}
+	}
+
 	void WorldLayer::SubmitForRender(RenderQueue& InQueue)
 	{
 		for (auto It : Renderables)

@@ -52,6 +52,7 @@ namespace Brahmanda
 		}
 
 		void RegisterRenderables();
+		void RegisterEntity(Entity& InEntity);
 		void SubmitForRender(RenderQueue& InQueue);
 
 		bool GetIsLoaded() const;
