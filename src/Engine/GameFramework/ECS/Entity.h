@@ -18,9 +18,8 @@ namespace Brahmanda
 		{
 
 		}
-		
-		Entity() = delete;
 
+		Entity() = delete;
 		~Entity() = default;
 
 		TextureHandle Tex = {};

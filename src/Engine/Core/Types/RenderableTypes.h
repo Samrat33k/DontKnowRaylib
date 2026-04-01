@@ -12,10 +12,18 @@ namespace Brahmanda
 {
 	struct RenderData
 	{
+		RenderData() = default;
+
+		RenderData(const TextureHandle& InTex, RenderTransform* InTransform)
+			: Tex(InTex), Transform(InTransform)
+		{
+
+		}
+
 		GeometryHandle Geo;
 		TextureHandle Tex;
 
-		RenderTransform Transform;
+		RenderTransform* Transform = nullptr;
 
 		//To be extended further as per requirement
 	};
@@ -37,9 +45,9 @@ namespace Brahmanda
 			RenderItems.clear();
 		}
 
-		void Submit(RenderData&& InData)
+		void Submit(const RenderData& InData)
 		{
-			RenderItems.emplace_back(std::move(InData));
+			RenderItems.emplace_back(InData);
 		}
 
 		const std::vector<RenderData>& GetRenderItems() const

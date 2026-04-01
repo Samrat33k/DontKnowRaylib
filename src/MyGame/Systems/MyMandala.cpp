@@ -3,6 +3,7 @@
 #include "MyMandala.h"
 #include "Engine/Systems/Logger.h"
 #include "Engine/GameFramework/WorldLayer.h"
+#include "Engine/GameFramework/LayerInitData.h"
 #include "Engine/Core/Types/RenderableTypes.h"
 
 #include "MyGame/Maps/GameMap01.h"
@@ -26,6 +27,7 @@ void MyMandala::OnInit()
 
 void MyMandala::PostInit()
 {
+	//Brahmanda::LayerInitData LayerData;
 	Brahmanda::WorldLayer& Map = Collection.AddLayerAt<GameMap01>(0, LayerData);
 	Map.Load();
 }

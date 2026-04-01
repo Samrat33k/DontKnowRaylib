@@ -24,8 +24,11 @@ namespace Brahmanda
 	void WorldLayer::Load()
 	{
 		bIsLoaded = true;
+		Entities.reserve(5000);
 
 		OnLoad();
+
+		RegisterRenderables();
 	}
 
 	void WorldLayer::Unload()
@@ -45,24 +48,40 @@ namespace Brahmanda
 
 	}
 
-	void WorldLayer::SubmitForRender(RenderQueue& InQueue)
+	void WorldLayer::RegisterRenderables()
 	{
-		for (auto& It : Entities)
+		for (auto& _e : Entities)
 		{
-			if (It)
+			if (_e->Tex.GetIsVisible())
 			{
-				TextureHandle& t = It->Tex;
-				if (!t.GetIsVisible())
-				{
-					continue;
-				}
-
-				RenderData Data;
-				Data.Tex = t;
-				Data.Transform = It->Transform;
-				InQueue.Submit(std::move(Data));
+				Renderables.emplace_back(_e->Tex, &_e->Transform);
 			}
 		}
+	}
+
+	void WorldLayer::SubmitForRender(RenderQueue& InQueue)
+	{
+		for (auto It : Renderables)
+		{
+			InQueue.Submit(It);
+		}
+
+		//for (auto& It : Entities)
+		//{
+		//	if (It)
+		//	{
+		//		TextureHandle& t = It->Tex;
+		//		if (!t.GetIsVisible())
+		//		{
+		//			continue;
+		//		}
+
+		//		RenderData Data;
+		//		Data.Tex = t;
+		//		Data.Transform = &It->Transform;
+		//		InQueue.Submit(std::move(Data));
+		//	}
+		//}
 	}
 
 	bool WorldLayer::GetIsLoaded() const

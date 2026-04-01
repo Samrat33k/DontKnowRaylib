@@ -30,7 +30,14 @@ namespace Brahmanda
 	{
 	public:
 
-		WorldLayerCollection() = default;
+		WorldLayerCollection()
+		{
+			for (int i = 0; i < N; i++)
+			{
+				UsedIndices[i] = -1;
+			}
+		}
+
 		~WorldLayerCollection() = default;
 
 		WorldLayer* GetLayerAt(size_t InIndex)
@@ -56,13 +63,31 @@ namespace Brahmanda
 		}
 
 		template<typename T, typename... Args>
+		T* CreateNewMap(LayerInitData& InData, Args... InArgs)
+		{
+			static_assert(std::is_base_of_v<Brahmanda::WorldLayer, T>, "T must derive from WorldLayer");
+
+			if (ActiveSize >= MaxSize - 1)
+			{
+				Logger::Error("Cannot add more Layers. World List already full");
+
+				return nullptr;
+			}
+
+			std::uint32_t Index = ActiveSize++;
+			WorldLayerList[Index] = std::make_unique<T>(InData, std::forward<Args>(InArgs)...);
+
+			return Ptr.get();
+		}
+
+		template<typename T, typename... Args>
 		T& AddLayerAt(size_t InIndex, LayerInitData& InData, Args... InArgs)
 		{
 			static_assert(std::is_base_of_v<Brahmanda::WorldLayer, T>, "T must derive from WorldLayer");
 			assert(InIndex < MaxSize);
 			assert(!WorldLayerList[InIndex] && "Layer already exists at Index");
 
-			std::unique_ptr<T> Ptr = std::make_unique<T>(std::forward<LayerInitData>(InData), std::forward<Args>(InArgs)...);
+			std::unique_ptr<T> Ptr = std::make_unique<T>(InData, std::forward<Args>(InArgs)...);
 			T& Ref = *Ptr;
 
 			WorldLayerList[InIndex] = std::move(Ptr);
@@ -77,9 +102,8 @@ namespace Brahmanda
 			static_assert(std::is_base_of_v<Brahmanda::WorldLayer, T>, "T must derive from WorldLayer");
 			assert(InIndex < MaxSize);
 
-			std::unique_ptr<T> Ptr = std::make_unique<T>(std::forward<LayerInitData>(InData), std::forward<Args>(InArgs)...);
+			std::unique_ptr<T> Ptr = std::make_unique<T>(InData, std::forward<Args>(InArgs)...);
 			T& Ref = *Ptr;
-
 			WorldLayerList[InIndex] = std::move(Ptr);
 
 			return Ref;
@@ -110,7 +134,10 @@ namespace Brahmanda
 
 		size_t MaxSize = N;
 		size_t ActiveSize = 0U;
+
+		std::array<std::int32_t, N> UsedIndices;
 		std::array<std::unique_ptr<WorldLayer>, N> WorldLayerList;
+		std::array<WorldLayer*, N> LoadedLayerList;
 		ELayerCollectionType CollectionType = ELayerCollectionType::ELCT_NONE;
 	};
 }

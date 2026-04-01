@@ -23,18 +23,32 @@ namespace Brahmanda
 		//To be extended further as per requirement
 	};
 
+	struct Vector2
+	{
+		constexpr Vector2() = default;
+
+		constexpr Vector2(float x, float y)
+			: X(x), Y(y)
+		{
+
+		}
+
+		float X = 0.f;
+		float Y = 0.f;
+	};
+
 	struct Vector3
 	{
 		constexpr Vector3() = default;
 
 		constexpr Vector3(float x, float y, float z)
-			: x(x), y(y), z(z)
+			: X(x), Y(y), Z(z)
 		{
 
 		}
 
-		float x = 0.f;
-		float y = 0.f;
-		float z = 0.f;
+		float X = 0.f;
+		float Y = 0.f;
+		float Z = 0.f;
 	};
 }

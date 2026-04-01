@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Engine/GameFramework/Elements/Camera.h"
+#include "Engine/Core/Types/CustomTypes.h"
 
 //...
 
@@ -15,8 +16,12 @@ namespace Brahmanda
 		CameraManager();
 		~CameraManager();
 
+		Brahmanda::GameCamera* GetActiveCamera() const;
+		void SetActiveCamera(Brahmanda::GameCamera* InCam);
+
 	private:
 
-		Brahmanda::Camera* ActiveCamera = nullptr;
+		CameraViewData CamData{};
+		Brahmanda::GameCamera* ActiveCamera = nullptr;
 	};
 }

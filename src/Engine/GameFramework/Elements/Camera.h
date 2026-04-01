@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Engine/Core/Types/CustomTypes.h"
+#include "raylib.h"
 
 //...
 
@@ -15,57 +16,68 @@ namespace Brahmanda
 		ECT_3DCamera
 	};
 
-	class Camera
+	struct CameraViewData
+	{
+		Vector3 ViewTarget = {};
+		float Rotation = 0.f;
+		float Zoom = 0.f;
+	};
+
+	class GameCamera
 	{
 	public:
 
-		Camera(ECameraType InType)
-			: CameraType(InType)
+		GameCamera(ECameraType InType, const CameraViewData& InView)
+			: CameraType(InType), ViewData(InView)
 		{
 
 		}
 
-		Camera() = delete;
+		GameCamera() = delete;
 
-		~Camera() = default;
+		~GameCamera() = default;
 
-		void Init()
-		{
-
-		}
-
+		virtual void Init() = 0;
 		virtual void Reset() = 0;
+
+	protected:
+
+		ECameraType CameraType = ECameraType::ECT_NONE;
+		CameraViewData ViewData = {};
 
 	private:
 
-		ECameraType CameraType = ECameraType::ECT_NONE;
 	};
 
-	class Camera2D : public Camera
+	class GameCamera2D : public GameCamera
 	{
-		Camera2D()
-			: Camera(ECameraType::ECT_2DCamera)
+		GameCamera2D(const CameraViewData& InView)
+			: GameCamera(ECameraType::ECT_2DCamera, InView)
 		{
 
 		}
 
-		void Reset() override
-		{
+		void Init() override;
+		void Reset() override;
 
-		}
+	private:
+
+		Camera2D RayCamera = {};
 	};
 
-	class Camera3D : public Camera
+	class GameCamera3D : public GameCamera
 	{
-		Camera3D()
-			: Camera(ECameraType::ECT_3DCamera)
+		GameCamera3D(const CameraViewData& InView)
+			: GameCamera(ECameraType::ECT_3DCamera, InView)
 		{
 
 		}
 
-		void Reset() override
-		{
+		void Init() override;
+		void Reset() override;
 
-		}
+	private:
+
+		Camera3D RayCamera = {};
 	};
 }

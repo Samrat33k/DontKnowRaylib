@@ -15,4 +15,14 @@ namespace Brahmanda
 	{
 
 	}
+
+	Brahmanda::GameCamera* CameraManager::GetActiveCamera() const
+	{
+		return ActiveCamera;
+	}
+
+	void CameraManager::SetActiveCamera(Brahmanda::GameCamera* InCam)
+	{
+		ActiveCamera = InCam;
+	}
 }

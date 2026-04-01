@@ -48,11 +48,8 @@ namespace Brahmanda
 
 		RendererRef->BeginRenderFrame();
 
-		if (GameRef)
-		{
-			FrameContextData FrameContext(Queue);
-			GameRef->Cycle(DeltaTime, FrameContext);
-		}
+		FrameContextData FrameContext(Queue);
+		GameRef->Cycle(DeltaTime, FrameContext);
 
 		RendererRef->RenderFrame(Queue);
 

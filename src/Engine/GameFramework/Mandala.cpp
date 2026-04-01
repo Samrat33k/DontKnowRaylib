@@ -24,6 +24,11 @@ namespace Brahmanda
 
 		OnInit();
 
+		if (!bIsSessionCreated)
+		{
+			StartNewSession<SessionMaster>();
+		}
+
 		return true;
 	}
 

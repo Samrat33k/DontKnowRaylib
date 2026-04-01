@@ -17,6 +17,7 @@ namespace Brahmanda
 	class RenderQueue;
 	class AssetManager;
 	class Entity;
+	struct RenderData;
 
 	class WorldLayer
 	{
@@ -50,8 +51,9 @@ namespace Brahmanda
 			return EntityPtr;
 		}
 
+		void RegisterRenderables();
 		void SubmitForRender(RenderQueue& InQueue);
-		
+
 		bool GetIsLoaded() const;
 		bool GetIsVisible() const;
 
@@ -68,5 +70,6 @@ namespace Brahmanda
 		bool bIsVisible = false;
 
 		std::vector<std::unique_ptr<Entity>> Entities;
+		std::vector<RenderData> Renderables;
 	};
 }

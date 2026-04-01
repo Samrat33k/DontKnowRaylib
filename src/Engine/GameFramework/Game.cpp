@@ -49,9 +49,9 @@ namespace Brahmanda
 	{
 		OnShutdown();
 
-		MandalaRef->Shutdown();
-
 		//...
+
+		MandalaRef->Shutdown();
 	}
 
 	void Game::OnShutdown()

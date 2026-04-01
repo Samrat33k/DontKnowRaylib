@@ -4,11 +4,14 @@
 
 #include <cstdint>
 #include <array>
+#include <type_traits>
+#include <cassert>
 
 #include "GameConfig.h"
 #include "WorldLayer.h"
 #include "WorldLayerCollection.h"
 #include "LayerInitData.h"
+#include "SessionMaster.h"
 
 //...
 
@@ -17,6 +20,7 @@ namespace Brahmanda
 	class FrameContextData;
 	class WorldLayer;
 	class AssetManager;
+	class CameraManager;
 
 	struct WorldConfig
 	{
@@ -56,6 +60,39 @@ namespace Brahmanda
 		void SetWorldConfig(const WorldConfig& InConfig);
 		void SetAssetManager(AssetManager* InRef);
 
+		template<typename T>
+		inline bool StartNewSession()
+		{
+			static_assert(std::is_base_of_v<SessionMaster, T>, "T must derive from SessionMaster");
+
+			if (bIsSessionCreated)
+			{
+				ActiveSession->ExitSession();
+				ActiveSession.reset();
+			}
+
+			ActiveSession = CreateNewSession<T>();
+			if (ActiveSession)
+			{
+				ActiveSession->EnterSession();
+				bIsSessionCreated = true;
+
+				return true;
+			}
+
+			return false;
+		}
+
+	private:
+
+		template<typename T>
+		inline std::unique_ptr<T> CreateNewSession()
+		{
+			static_assert(std::is_base_of_v<SessionMaster, T>, "T must derive from SessionMaster");
+
+			return std::make_unique<T>();
+		}
+
 	protected:
 
 		WorldLayerCollection<Config::World::MAX_WORLD_LAYER_COUNT> Collection;
@@ -63,7 +100,11 @@ namespace Brahmanda
 
 	private:
 
+		bool bIsSessionCreated = false;
+
 		AssetManager* Manager = nullptr;
+		std::unique_ptr<SessionMaster> ActiveSession;
+		//std::unique_ptr<CameraManager> CameraManagerRef;
 		uint16_t ActiveWorldLayerCount = 0;
 	};
 }

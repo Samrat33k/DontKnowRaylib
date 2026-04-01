@@ -6,5 +6,25 @@
 
 namespace Brahmanda
 {
+	void GameCamera2D::Init()
+	{
+		RayCamera.target = { ViewData.ViewTarget.X, ViewData.ViewTarget.Y };
+		RayCamera.rotation = ViewData.Rotation;
+		RayCamera.zoom = ViewData.Zoom;
+	}
 
+	void GameCamera2D::Reset()
+	{
+
+	}
+
+	void GameCamera3D::Init()
+	{
+		RayCamera.target = { ViewData.ViewTarget.X, ViewData.ViewTarget.Y, ViewData.ViewTarget.Z };
+	}
+
+	void GameCamera3D::Reset()
+	{
+
+	}
 }
