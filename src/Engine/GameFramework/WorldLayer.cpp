@@ -28,7 +28,7 @@ namespace Brahmanda
 
 		OnLoad();
 
-		RegisterRenderables();
+		//RegisterRenderables();
 	}
 
 	void WorldLayer::Unload()

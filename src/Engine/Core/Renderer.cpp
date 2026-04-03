@@ -43,7 +43,7 @@ namespace Brahmanda
 		for (RenderData Item : InRenderQueue.GetRenderItems())
 		{
  			Texture& Tex = AssetManagerRef->GetTexture(Item.Tex);
-			RenderTransform*& Transform = Item.Transform;
+			ObjectTransform*& Transform = Item.Transform;
 			DrawTexturePro(Tex, { 0, 0, (float)Tex.width, (float)Tex.height }, { Transform->Pos[0], Transform->Pos[1], 100, 100 }, {}, Transform->Rot[0], WHITE);
 		}
 	}

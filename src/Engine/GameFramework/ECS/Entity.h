@@ -13,7 +13,7 @@ namespace Brahmanda
 	{
 	public:
 
-		Entity(const RenderTransform& InTransform)
+		Entity(const ObjectTransform& InTransform)
 			: Transform(InTransform)
 		{
 
@@ -25,6 +25,6 @@ namespace Brahmanda
 		TextureHandle Tex = {};
 		GeometryHandle Geo = {};
 
-		RenderTransform Transform = {};
+		ObjectTransform Transform = {};
 	};
 }

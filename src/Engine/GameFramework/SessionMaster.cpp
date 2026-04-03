@@ -34,9 +34,4 @@ namespace Brahmanda
 	{
 
 	}
-
-	void SessionMaster::SendFloatSignal(float InValue)
-	{
-
-	}
 }

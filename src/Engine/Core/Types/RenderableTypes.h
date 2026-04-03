@@ -14,7 +14,7 @@ namespace Brahmanda
 	{
 		RenderData() = default;
 
-		RenderData(const TextureHandle& InTex, RenderTransform* InTransform)
+		RenderData(const TextureHandle& InTex, ObjectTransform* InTransform)
 			: Tex(InTex), Transform(InTransform)
 		{
 
@@ -23,7 +23,7 @@ namespace Brahmanda
 		GeometryHandle Geo;
 		TextureHandle Tex;
 
-		RenderTransform* Transform = nullptr;
+		ObjectTransform* Transform = nullptr;
 
 		//To be extended further as per requirement
 	};

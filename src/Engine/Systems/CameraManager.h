@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Engine/GameFramework/Elements/Camera.h"
+#include "Engine/GameFramework/Scene/Camera.h"
 #include "Engine/Core/Types/CustomTypes.h"
 
 //...

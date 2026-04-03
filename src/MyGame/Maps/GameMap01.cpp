@@ -50,7 +50,7 @@ void GameMap01::Create(int InW, int InH)
 	int i = 0;
 	for (Block*& It : MapData)
 	{
-		Brahmanda::RenderTransform Transform;
+		Brahmanda::ObjectTransform Transform;
 		Transform.Pos[0] = 0.f + 101 * (i % 20);
 		Transform.Pos[1] = 0.f + 101 * (i / 20);
 		Transform.Rot[1] = 15.f;
@@ -59,8 +59,9 @@ void GameMap01::Create(int InW, int InH)
 		It->Tex = _t;
 		if (i % 2 == 0)
 		{
-			//It->Tex.SetIsVisible(false);
+			It->Tex.SetIsVisible(false);
 		}
+		RegisterEntity(*It);
 
 		i++;
 	}

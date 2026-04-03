@@ -6,23 +6,6 @@
 
 namespace Brahmanda
 {
-	struct RenderTransform
-	{
-		//Custom wrapper to support other data formats in future.
-		//For now things will be simpler
-
-		//Positions
-		float Pos[3] = { 0.f, 0.f, 0.f };
-
-		//Rotations
-		float Rot[3] = { 0.f, 0.f, 0.f };
-
-		//Scales
-		float Scale[3] = { 1.f, 1.f, 1.f };
-
-		//To be extended further as per requirement
-	};
-
 	struct Vector2
 	{
 		constexpr Vector2() = default;
@@ -50,5 +33,22 @@ namespace Brahmanda
 		float X = 0.f;
 		float Y = 0.f;
 		float Z = 0.f;
+	};
+
+	struct ObjectTransform
+	{
+		//Custom wrapper to support other data formats in future.
+		//For now things will be simpler
+
+		//Positions
+		float Pos[3] = { 0.f, 0.f, 0.f };
+
+		//Rotations
+		float Rot[3] = { 0.f, 0.f, 0.f };
+
+		//Scales
+		float Scale[3] = { 1.f, 1.f, 1.f };
+
+		//To be extended further as per requirement
 	};
 }

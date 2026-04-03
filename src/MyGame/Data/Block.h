@@ -19,7 +19,7 @@ public:
 		BLOCKS_COUNT
 	};
 
-	Block(const Brahmanda::RenderTransform& InTransform)
+	Block(const Brahmanda::ObjectTransform& InTransform)
 		: Entity(InTransform)
 	{
 

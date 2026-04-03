@@ -3,6 +3,7 @@
 #pragma once
 
 #include <cstdint>
+#include "SessionMessenger.h"
 
 //...
 
@@ -20,7 +21,7 @@ namespace Brahmanda
 		ISessionBridge() = default;
 		virtual ~ISessionBridge() = default;
 
-		virtual void SendFloatSignal(float InValue) = 0;
+		//virtual void SendSignal(float InValue) = 0;
 	};
 
 	class SessionMaster : public ISessionBridge
@@ -36,7 +37,7 @@ namespace Brahmanda
 
 		//Interface Implementation
 
-		void SendFloatSignal(float InValue) override;
+		//void SendFloatSignal(float InValue) override;
 
 	private:
 
