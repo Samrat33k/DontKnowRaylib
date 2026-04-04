@@ -18,6 +18,11 @@ namespace Brahmanda
 
 	}
 
+	ECameraType GameCamera::GetCameraType()
+	{
+		return CameraType;
+	}
+
 	void GameCamera3D::Init()
 	{
 		RayCamera.target = { ViewData.ViewTarget.X, ViewData.ViewTarget.Y, ViewData.ViewTarget.Z };

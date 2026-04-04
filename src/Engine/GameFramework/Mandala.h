@@ -109,7 +109,7 @@ namespace Brahmanda
 
 		AssetManager* AssetManager = nullptr;
 		std::unique_ptr<SessionMaster> ActiveSession;
-		//std::unique_ptr<CameraManager> CameraManagerRef;
+		std::unique_ptr<CameraManager> CameraManagerRef;
 		uint16_t ActiveWorldLayerCount = 0;
 	};
 }

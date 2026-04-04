@@ -9,6 +9,8 @@
 
 namespace Brahmanda
 {
+	class CameraManager;
+
 	struct SessionData
 	{
 		uint32_t SessionID = 0;

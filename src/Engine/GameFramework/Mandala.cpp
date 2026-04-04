@@ -3,6 +3,7 @@
 #include "Mandala.h"
 #include "Engine/Systems/Logger.h"
 #include "Engine/Core/Types/RenderableTypes.h"
+#include "Engine/Systems/CameraManager.h"
 
 //...
 
@@ -27,6 +28,8 @@ namespace Brahmanda
 	void Mandala::Init()
 	{
 		Logger::Info("Mandala - Init - Called from Base class!");
+
+		CameraManagerRef = std::make_unique<CameraManager>();
 
 		OnInit();
 

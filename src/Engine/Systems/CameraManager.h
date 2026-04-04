@@ -16,12 +16,12 @@ namespace Brahmanda
 		CameraManager();
 		~CameraManager();
 
-		Brahmanda::GameCamera* GetActiveCamera() const;
-		void SetActiveCamera(Brahmanda::GameCamera* InCam);
+		GameCamera* GetActiveCamera() const;
+		void SetActiveCamera(GameCamera* InCam);
 
 	private:
 
 		CameraViewData CamData{};
-		Brahmanda::GameCamera* ActiveCamera = nullptr;
+		GameCamera* ActiveCamera = nullptr;
 	};
 }

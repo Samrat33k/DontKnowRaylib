@@ -40,6 +40,8 @@ namespace Brahmanda
 		virtual void Init() = 0;
 		virtual void Reset() = 0;
 
+		ECameraType GetCameraType();
+
 	protected:
 
 		ECameraType CameraType = ECameraType::ECT_NONE;

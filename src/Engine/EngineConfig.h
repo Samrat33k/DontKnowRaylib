@@ -8,7 +8,7 @@ namespace Brahmanda::Config
 {
 	namespace Rendering
 	{
-		constexpr size_t MAX_RENDERQUEUE_SIZE = 2000;
+		constexpr size_t MAX_RENDERQUEUE_SIZE = 2000U;
 		constexpr size_t MAX_DRAW_CALLS = 2048U;
 	}
 }
