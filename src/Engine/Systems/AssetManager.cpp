@@ -244,4 +244,9 @@ namespace Brahmanda
 	{
 		return bIsShuttingDown;
 	}
+
+	void AssetManager::Shutdown()
+	{
+		bIsShuttingDown = true;
+	}
 }

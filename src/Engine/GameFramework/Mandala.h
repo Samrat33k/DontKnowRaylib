@@ -40,6 +40,11 @@ namespace Brahmanda
 
 	};
 
+	struct ManadalaInitializerData
+	{
+		AssetManager* AssetMgr;
+	};
+
 	class Mandala
 	{
 	public:
@@ -49,7 +54,8 @@ namespace Brahmanda
 		Mandala();
 		virtual ~Mandala();
 
-		bool Init();
+		void Construct(ManadalaInitializerData Initializer);
+		void Init();
 		virtual void OnInit();
 		virtual void PostInit();
 		void Cycle(float DeltaTime, FrameContextData& InContext);
@@ -58,7 +64,6 @@ namespace Brahmanda
 		virtual void OnShutdown();
 
 		void SetWorldConfig(const WorldConfig& InConfig);
-		void SetAssetManager(AssetManager* InRef);
 
 		template<typename T>
 		inline bool StartNewSession()
@@ -102,7 +107,7 @@ namespace Brahmanda
 
 		bool bIsSessionCreated = false;
 
-		AssetManager* Manager = nullptr;
+		AssetManager* AssetManager = nullptr;
 		std::unique_ptr<SessionMaster> ActiveSession;
 		//std::unique_ptr<CameraManager> CameraManagerRef;
 		uint16_t ActiveWorldLayerCount = 0;

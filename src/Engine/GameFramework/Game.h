@@ -27,7 +27,8 @@ namespace Brahmanda
 		Game();
 		~Game() override;
 
-		bool Init() override;
+		void Construct(GameInitalizerData Initializer);
+		void Init() override;
 		virtual void OnInit();
 		void Cycle(float DeltaTime, FrameContextData& InContext) override;
 		virtual void OnCycle(float DeltaTime);
@@ -35,14 +36,13 @@ namespace Brahmanda
 		virtual void OnShutdown();
 
 		AssetManager* GetAssetManager() const;
-		void SetAssetManager(Brahmanda::AssetManager* InRef) override;
 
 		virtual std::unique_ptr<Mandala> ConstructMandala();
 		Mandala* GetGameMandala() const;
 
 	private:
 
-		AssetManager* Manager = nullptr;
+		AssetManager* AssetManagerRef = nullptr;
 		std::unique_ptr<Mandala> MandalaRef;
 	};
 }

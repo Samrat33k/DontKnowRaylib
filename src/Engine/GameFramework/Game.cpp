@@ -15,17 +15,23 @@ namespace Brahmanda
 
 	}
 
-	bool Game::Init()
+	void Game::Init()
 	{
 		Logger::Info("Game Initialized!");
 
 		MandalaRef = ConstructMandala();
+
+		ManadalaInitializerData InitData;
+		InitData.AssetMgr = AssetManagerRef;
+		MandalaRef->Construct(InitData);
 		MandalaRef->Init();
-		MandalaRef->SetAssetManager(Manager);
 
 		OnInit();
+	}
 
-		return true;
+	void Game::Construct(GameInitalizerData Initilizer)
+	{
+		AssetManagerRef = Initilizer.AssetMgr;
 	}
 
 	void Game::OnInit()
@@ -61,12 +67,7 @@ namespace Brahmanda
 
 	AssetManager* Game::GetAssetManager() const
 	{
-		return Manager;
-	}
-
-	void Game::SetAssetManager(AssetManager* InRef)
-	{
-		Manager = InRef;
+		return AssetManagerRef;
 	}
 
 	std::unique_ptr<Mandala> Game::ConstructMandala()

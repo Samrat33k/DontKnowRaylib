@@ -18,7 +18,13 @@ namespace Brahmanda
 
 	}
 
-	bool Mandala::Init()
+	void Mandala::Construct(ManadalaInitializerData Initializer)
+	{
+		AssetManager = Initializer.AssetMgr;
+		LayerData.AssetMgr = AssetManager;
+	}
+
+	void Mandala::Init()
 	{
 		Logger::Info("Mandala - Init - Called from Base class!");
 
@@ -29,7 +35,7 @@ namespace Brahmanda
 			StartNewSession<SessionMaster>();
 		}
 
-		return true;
+		PostInit();
 	}
 
 	void Mandala::OnInit()
@@ -75,13 +81,5 @@ namespace Brahmanda
 	void Mandala::SetWorldConfig(const WorldConfig& InConfig)
 	{
 		
-	}
-
-	void Mandala::SetAssetManager(AssetManager* InRef)
-	{
-		Manager = InRef;
-		LayerData.AssetMgr = InRef;
-
-		PostInit();
 	}
 }

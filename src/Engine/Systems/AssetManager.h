@@ -23,6 +23,7 @@ namespace Brahmanda
 		~AssetManager();
 
 		void Init();
+		void Shutdown();
 
 		TextureHandle ReqLoadTexture(const std::string& InPath);
 		void AddTextureRef(uint32_t InID);

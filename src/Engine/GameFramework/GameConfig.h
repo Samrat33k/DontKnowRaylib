@@ -17,9 +17,4 @@ namespace Brahmanda::Config
 		//Change this value to modify max number of World Layers Mandala can contain
 		constexpr size_t MAX_WORLD_LAYER_COUNT = 8U;
 	}
-
-	namespace Rendering
-	{
-		constexpr size_t MAX_DRAW_CALLS = 2048U;
-	}
 }

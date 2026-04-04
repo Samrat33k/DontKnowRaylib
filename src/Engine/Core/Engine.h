@@ -3,11 +3,15 @@
 #pragma once
 
 #include "CoreIncludes.h"
+#include "Engine/EngineConfig.h"
+
+//...
 
 namespace Brahmanda
 {
 	class IGame;
 	class AssetManager;
+	class EntityManager;
 	class Renderer;
 	class RenderQueue;
 
@@ -33,6 +37,7 @@ namespace Brahmanda
 
 		IGame* GameRef = nullptr;
 		std::unique_ptr<Brahmanda::AssetManager> GlobalAssetManager;
+		std::unique_ptr<EntityManager> EntityManagerRef;
 		std::unique_ptr<Renderer> RendererRef;
 		std::unique_ptr<RenderQueue> RenderQueueRef;
 	};

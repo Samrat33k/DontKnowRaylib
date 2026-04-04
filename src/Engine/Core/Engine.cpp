@@ -4,6 +4,7 @@
 
 #include "IGame.h"
 #include "Engine/Systems/AssetManager.h"
+#include "Engine/Systems/EntityManager.h"
 #include "Engine/Core/Renderer.h"
 #include "Engine/Core/Types/RenderableTypes.h"
 #include "Engine/Systems/Logger.h"
@@ -23,16 +24,22 @@ namespace Brahmanda
 
 		GlobalAssetManager = std::make_unique<AssetManager>();
 		GlobalAssetManager->Init();
+		EntityManagerRef = std::make_unique<EntityManager>();
+		EntityManagerRef->Init();
 		RendererRef = std::make_unique<Renderer>();
 		RendererRef->InitRenderer(GlobalAssetManager.get());
 
 		RenderQueueRef = std::make_unique<RenderQueue>();
-		RenderQueueRef->ReserveSize(1000);
+		RenderQueueRef->ReserveSize(Config::Rendering::MAX_RENDERQUEUE_SIZE);
 		RenderQueueRef->Clear();
 
 		if (GameRef)
 		{
-			GameRef->SetAssetManager(GlobalAssetManager.get());
+			GameInitalizerData InitData;
+			InitData.AssetMgr = GlobalAssetManager.get();
+			InitData.EntityMgr = EntityManagerRef.get();
+
+			GameRef->Construct(InitData);
 			GameRef->Init();
 
 			return true;
@@ -62,6 +69,9 @@ namespace Brahmanda
 		{
 			GameRef->Shutdown();
 		}
+
+		GlobalAssetManager->Shutdown();
+		EntityManagerRef->Shutdown();
 	}
 
 	void Engine::SetGame(IGame* InGame)
