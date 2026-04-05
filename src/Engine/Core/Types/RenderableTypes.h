@@ -10,6 +10,8 @@
 
 namespace Brahmanda
 {
+	class GameCamera;
+
 	struct RenderData
 	{
 		RenderData() = default;
@@ -72,6 +74,7 @@ namespace Brahmanda
 		FrameContextData operator=(const FrameContextData&) = delete;
 
 		RenderQueue& PrimaryQueue;
+		GameCamera* ActiveCamera = nullptr;
 
 		//To be expanded further as per requirement
 	};

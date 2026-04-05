@@ -20,7 +20,7 @@ namespace Brahmanda
 		void InitRenderer(AssetManager* InRef);
 
 		void BeginRenderFrame();
-		void RenderFrame(const RenderQueue& InRenderQueue);
+		void RenderFrame(const FrameContextData& InContext);
 		void EndRenderFrame();
 
 		void ShutdownRenderer();

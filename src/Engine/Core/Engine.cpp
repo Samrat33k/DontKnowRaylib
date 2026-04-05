@@ -58,7 +58,7 @@ namespace Brahmanda
 		FrameContextData FrameContext(Queue);
 		GameRef->Cycle(DeltaTime, FrameContext);
 
-		RendererRef->RenderFrame(Queue);
+		RendererRef->RenderFrame(FrameContext);
 
 		RendererRef->EndRenderFrame();
 	}

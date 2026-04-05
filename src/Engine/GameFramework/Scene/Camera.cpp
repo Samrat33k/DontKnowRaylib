@@ -18,6 +18,16 @@ namespace Brahmanda
 
 	}
 
+	Camera2D* GameCamera2D::Get2DCamera()
+	{
+		return &RayCamera;
+	}
+
+	Camera3D* GameCamera2D::Get3DCamera()
+	{
+		return nullptr;
+	}
+
 	ECameraType GameCamera::GetCameraType()
 	{
 		return CameraType;
@@ -31,5 +41,14 @@ namespace Brahmanda
 	void GameCamera3D::Reset()
 	{
 
+	}
+	Camera2D* GameCamera3D::Get2DCamera()
+	{
+		return nullptr;
+	}
+
+	Camera3D* GameCamera3D::Get3DCamera()
+	{
+		return &RayCamera;
 	}
 }

@@ -42,6 +42,9 @@ namespace Brahmanda
 
 		ECameraType GetCameraType();
 
+		virtual Camera2D* Get2DCamera() = 0;
+		virtual Camera3D* Get3DCamera() = 0;
+
 	protected:
 
 		ECameraType CameraType = ECameraType::ECT_NONE;
@@ -62,6 +65,9 @@ namespace Brahmanda
 		void Init() override;
 		void Reset() override;
 
+		Camera2D* Get2DCamera() override;
+		Camera3D* Get3DCamera() override;
+
 	private:
 
 		Camera2D RayCamera = {};
@@ -77,6 +83,9 @@ namespace Brahmanda
 
 		void Init() override;
 		void Reset() override;
+
+		Camera2D* Get2DCamera() override;
+		Camera3D* Get3DCamera() override;
 
 	private:
 

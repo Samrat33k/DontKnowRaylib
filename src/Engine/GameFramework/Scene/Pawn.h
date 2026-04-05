@@ -8,5 +8,8 @@
 
 namespace Brahmanda
 {
-	
+	class Pawn
+	{
+
+	};
 }
